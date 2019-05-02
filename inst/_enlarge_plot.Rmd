@@ -1,0 +1,41 @@
+```{r setup,eval=TRUE,echo=FALSE}
+if (exists("testing")) {
+	plot <- ggplot2::qplot(1:10)
+	name <- "test_plot"
+}
+```
+
+
+<!-- Button trigger modal -->
+<a href="#`r plot_name`" data-toggle="modal" data-target="#`r plot_name`">
+```{r fig.width=3,fig.height=3}
+plot
+```
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="`r plot_name`" tabindex="-1" role="dialog" aria-labelledby="`r plot_name`Label" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="`r plot_name`Label">Modal title</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+
+```{r fig.width=7,fig.height=7}
+plot
+```
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
