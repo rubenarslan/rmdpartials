@@ -1,0 +1,60 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# rmdpartials
+[![Travis-CI Build Status](https://travis-ci.org/rubenarslan/rmdpartials.svg?branch=master)](https://travis-ci.org/rubenarslan/rmdpartials) 
+[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://codecov.io/gh/rubenarslan/rmdpartials)
+
+[![CRAN status](http://www.r-pkg.org/badges/version-ago/rmdpartials)](https://cran.r-project.org/package=rmdpartials)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/rmdpartials)
+[![DOI](https://zenodo.org/badge/109252375.svg)](https://zenodo.org/badge/latestdoi/109252375)
+
+_Simplify using rmarkdown partials to document objects in R_
+
+## Description
+
+Ever want to make a standardized way to report a summary of something like a regression, but did not want to limit yourself to one unformatted block of text, one table, or one figure?
+
+Rmarkdown partials allow you to define standardised knitr code chunks that become part of your rmarkdown report. They can then be turned into HTML,
+PDFs, or Word files. You could, for example, create an rmarkdown partial to summarise regression models in a flexible way.
+
+You can also define your partials as methods of `knit_print`, so that a rich rmarkdown partial is made by default.
+
+## Documentation
+Confer the help or: https://rubenarslan.github.io/rmdpartials.
+See the [vignette](https://rubenarslan.github.io/rmdpartials/articles/rmdpartials.html) for a quick example of an HTML document generated with `rmdpartials`.
+
+## Use locally
+### Install
+
+Run the following in R.
+```r
+install.packages("rmdpartials")
+```
+
+To get the latest development version:
+
+```r
+install.packages("remotes")
+remotes::install_github("rubenarslan/rmdpartials")
+```
+
+
+```{r}`r ''`
+m1 <- lm(y ~ x, data = data)
+your_partial(m1)
+```
+````
+
+## [Code of conduct for contributing](CONDUCT.md)
