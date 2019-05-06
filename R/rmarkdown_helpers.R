@@ -18,22 +18,23 @@
 #' @param quiet passed to [knitr::knit_child()]
 #' @param options defaults to NULL.
 #' @param envir passed to [knitr::knit_child()]
+#' @param name a name to use for cacheing and figure paths. Randomly generated if left unspecified.
 #' @param use_strings whether to read in the child file as a character string (solves working directory problems but harder to debug)
 #'
 #' @export
 #' @examples
 #' \dontrun{
-#' # an example of a wrapper function that calls asis_knit_child with an argument
+#' # an example of a wrapper function that calls partial with an argument
 #' # ensures distinct paths for cache and figures, so that these calls can be looped in parallel
 #' regression_summary <- function(model) {
 #'    hash <- digest::digest(model)
 #'    options <- list(
 #'        fig.path = paste0(knitr::opts_chunk$get("fig.path"), hash, "-"),
 #'        cache.path = paste0(knitr::opts_chunk$get("cache.path"), hash, "-"))
-#'    asis_knit_child("_regression_summary.Rmd", options = options)
+#'    partial("_regression_summary.Rmd", options = options)
 #' }
 #' }
-asis_knit_child <- function(input = NULL, text = NULL, ...,
+partial <- function(input = NULL, text = NULL, ...,
                             quiet = TRUE, options = NULL,
                             envir = parent.frame(), name = NULL,
                             use_strings = TRUE) {
@@ -85,7 +86,7 @@ asis_knit_child <- function(input = NULL, text = NULL, ...,
 
 #' Paste and output as is (render markup)
 #'
-#' Helper function for `knit_asis` objects, useful when e.g. [asis_knit_child()] was used in a loop.
+#' Helper function for `knit_asis` objects, useful when e.g. [partial()] was used in a loop.
 #'
 #' Works like [base::paste()] with both the sep and the collapse argument set to two empty lines
 #'
@@ -125,7 +126,7 @@ write_to_file <- function(..., name = NULL, ext = ".Rmd") {
 
 
 require_file <- function(file) {
-  system.file(file, package = 'rmarkdownpartials', mustWork = TRUE)
+  system.file(file, package = 'rmdpartials', mustWork = TRUE)
 }
 
 recursive_escape <- function(x, depth = 0, max_depth = 4,
@@ -151,7 +152,7 @@ recursive_escape <- function(x, depth = 0, max_depth = 4,
 }
 
 safe_name <- function(x) {
-  stringr::str_replace_all(x, "[^[:alnum:]]", "_")
+  gsub("[^[:alnum:]]", "_", x)
 }
 
 #' Knit to temp dir

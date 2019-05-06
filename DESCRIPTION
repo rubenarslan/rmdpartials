@@ -1,36 +1,27 @@
-Package: rmarkdownpartials
+Package: rmdpartials
 Title: Partial rmarkdown documents to prettify your reports
 Description: 
 		This package relies on 'rmarkdown' partials, so you can generate 
 		HTML, PDF, and Word documents. It provides various helper functions to 
 		make certain functions easier.
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre"))
 Depends: R (>= 3.0.1)
 Language: en_GB
-URL: https://github.com/rubenarslan/codebook
-BugReports: https://github.com/rubenarslan/codebook/issues
+URL: https://github.com/rubenarslan/rmdpartials
+BugReports: https://github.com/rubenarslan/rmdpartials/issues
 License: MIT + file LICENSE
 Imports:
-		stats,
-		methods,
-		graphics,
-		digest,
-		utils,
-		rmarkdown,
-		knitr,
-    ggplot2 (>= 2.0.0),
-    stringr,
-    rlang,
-    dplyr,
-    DT,
-    jsonlite,
-    tibble,
-    htmltools,
-    glue
+	stats,
+	digest,
+	utils,
+	knitr,
+  htmltools
 Suggests:
   testthat,
-  roxygen2
+  roxygen2,
+  rmarkdown,
+  ggplot2 (>= 2.0.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

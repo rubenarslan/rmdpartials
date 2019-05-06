@@ -1,0 +1,25 @@
+---
+title: "Rmarkdown partial example"
+author: "Ruben Arslan"
+date: "`r Sys.Date()`"
+output:
+  html_document
+vignette: >
+  %\VignetteIndexEntry{Rmarkdown partial example}
+  \%VignetteKeyword{rmdpartials}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+For example, you can make enlarge-able plots.
+
+```{r}
+library(rmdpartials)
+x <- rnorm(100)
+y <- x + rnorm(100) + 0.5 * x^2
+
+enlarge_plot(ggplot2::qplot(x, y), plot_name = "myplot")
+```
+
