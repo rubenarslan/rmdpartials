@@ -2,6 +2,6 @@
 
 S3method(print,knit_asis)
 export(enlarge_plot)
-export(knit_to_temp_dir)
 export(partial)
 export(paste.knit_asis)
+export(regression_diagnostics)

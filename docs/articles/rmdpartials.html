@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@
       <h1>Rmarkdown partial example</h1>
                         <h4 class="author">Ruben Arslan</h4>
             
-            <h4 class="date">2019-05-06</h4>
+            <h4 class="date">2019-07-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rubenarslan/rmdpartials/blob/master/vignettes/rmdpartials.Rmd"><code>vignettes/rmdpartials.Rmd</code></a></small>
       <div class="hidden name"><code>rmdpartials.Rmd</code></div>
@@ -83,23 +83,22 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>For example, you can make enlarge-able plots.</p>
+<p>For example, you can make enlarge-able plots:</p>
+<div id="graphical-relationship" class="section level2">
+<h2 class="hasAnchor">
+<a href="#graphical-relationship" class="anchor"></a>Graphical relationship</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rmdpartials)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">100</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="../reference/enlarge_plot.html">enlarge_plot</a></span>(ggplot2<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/qplot">qplot</a></span>(x, y), <span class="dt">plot_name =</span> <span class="st">"myplot"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../reference/enlarge_plot.html">enlarge_plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(x, y), <span class="dt">large_plot =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(x, y), <span class="dt">plot_name =</span> <span class="st">"myplot"</span>)</a></code></pre></div>
 <!-- Button trigger modal -->
-<p><a href="#myplot" data-toggle="modal" data-target="#myplot"></a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">plot</a></code></pre></div>
-<p><img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-2-1.png" width="192"></p>
+<p><a href="#myplot" data-toggle="modal" data-target="#myplot"> <img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-4-1.png" width="192"></a></p>
 <!-- Modal -->
 <div id="myplot" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myplotLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-body">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">large_plot</a></code></pre></div>
-<p><img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-3-1.png" width="672"></p>
+<p><img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -110,6 +109,50 @@ Close
 </div>
 </div>
 </div>
+<div id="regression" class="section level2">
+<h2 class="hasAnchor">
+<a href="#regression" class="anchor"></a>Regression</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">reg &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(y <span class="op">~</span><span class="st"> </span>x)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../reference/regression_diagnostics.html">regression_diagnostics</a></span>(reg)</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th align="right">x</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td align="right">0.3376142</td>
+</tr>
+<tr class="even">
+<td>x</td>
+<td align="right">0.6262263</td>
+</tr>
+</tbody>
+</table>
+<p>Values vs. fitted values.</p>
+<!-- Button trigger modal -->
+<p><a href="#9936a55d70260fd04a2fe469ae15c89e" data-toggle="modal" data-target="#9936a55d70260fd04a2fe469ae15c89e"> <img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_9936a55d70260fd04a2fe469ae15c89e_unnamed-chunk-11-1.png" width="192"></a></p>
+<!-- Modal -->
+<div id="9936a55d70260fd04a2fe469ae15c89e" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="9936a55d70260fd04a2fe469ae15c89eLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body">
+<p><img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_9936a55d70260fd04a2fe469ae15c89e_unnamed-chunk-12-1.png" width="672"></p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">
+Close
+</button>
+</div>
+</div>
+</div>
+</div>
+<details><p><summary>Diagnostics (click to show)</summary></p>
+<p><img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_unnamed-chunk-9-1.png" width="700"><img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_unnamed-chunk-9-2.png" width="700"><img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_unnamed-chunk-9-3.png" width="700"><img src="rmdpartials_files/figure-html/bbed281e52aa2e854aeaa274b717cff6_unnamed-chunk-9-4.png" width="700"></p>
+</details>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -117,7 +160,12 @@ Close
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction">Introduction</a></li>
+<li>
+<a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#graphical-relationship">Graphical relationship</a></li>
+      <li><a href="#regression">Regression</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>

@@ -1,0 +1,28 @@
+```{r rmdpartialsetup,eval=TRUE,echo=FALSE}
+if (exists("testing")) {
+  data("ChickWeight")
+  regression <- lm(weight ~ Time, data = ChickWeight)
+}
+```
+
+
+```{r}
+knitr::kable(coef(regression))
+```
+
+Values vs. fitted values.
+
+```{r}
+enlarge_plot(plot(regression$model[,1], fitted(regression)),
+             large_plot = plot(regression$model[,1], fitted(regression)))
+```
+
+<details>
+
+<summary>Diagnostics (click to show)</summary>
+
+```{r}
+plot(regression, ask = FALSE)
+```
+
+</details>

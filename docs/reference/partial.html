@@ -67,7 +67,7 @@ defaults to quiet = TRUE
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ defaults to quiet = TRUE
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Knit a child document and output as is (render markup)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rubenarslan/rmdpartials/blob/master/R/rmarkdown_helpers.R'><code>R/rmarkdown_helpers.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/rubenarslan/rmdpartials/blob/master/R/partial.R'><code>R/partial.R</code></a></small>
     <div class="hidden name"><code>partial.Rd</code></div>
     </div>
 
@@ -123,7 +123,7 @@ defaults to quiet = TRUE
 
     <pre class="usage"><span class='fu'>partial</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame</a></span>(), <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_strings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>show_code</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>use_strings</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,6 +157,10 @@ defaults to quiet = TRUE
       <td><p>a name to use for cacheing and figure paths. Randomly generated if left unspecified.</p></td>
     </tr>
     <tr>
+      <th>show_code</th>
+      <td><p>whether to print the R code for the partial or just the results (sets the chunk option echo = FALSE while the chunk is being rendered)</p></td>
+    </tr>
+    <tr>
       <th>use_strings</th>
       <td><p>whether to read in the child file as a character string (solves working directory problems but harder to debug)</p></td>
     </tr>
@@ -172,15 +176,14 @@ However, you may also want to use knit children inside functions to e.g. summari
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='co'># super simple partial example</span>
+<span class='fu'>partial</span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Test"</span>)</div><div class='output co'>#&gt; 
+#&gt; Test</div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
 <span class='co'># an example of a wrapper function that calls partial with an argument</span>
 <span class='co'># ensures distinct paths for cache and figures, so that these calls can be looped in parallel</span>
-<span class='no'>regression_summary</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>model</span>) {
-   <span class='no'>hash</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>digest</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/digest/topics/digest'>digest</a></span>(<span class='no'>model</span>)
-   <span class='no'>options</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
-       <span class='kw'>fig.path</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/knitr/topics/opts_chunk'>opts_chunk</a></span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/get'>get</a></span>(<span class='st'>"fig.path"</span>), <span class='no'>hash</span>, <span class='st'>"-"</span>),
-       <span class='kw'>cache.path</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/knitr/topics/opts_chunk'>opts_chunk</a></span>$<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/get'>get</a></span>(<span class='st'>"cache.path"</span>), <span class='no'>hash</span>, <span class='st'>"-"</span>))
-   <span class='fu'>partial</span>(<span class='st'>"_regression_summary.Rmd"</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='no'>options</span>)
+<span class='no'>regression_summary</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>regression</span>) {
+   <span class='fu'>partial</span>(<span class='st'>"_regression_summary.Rmd"</span>)
 }
 <span class='co'># }</span></pre>
   </div>

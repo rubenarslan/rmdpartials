@@ -1,10 +1,14 @@
 Package: rmdpartials
 Title: Partial rmarkdown documents to prettify your reports
 Description: 
-		This package relies on 'rmarkdown' partials, so you can generate 
-		HTML, PDF, and Word documents. It provides various helper functions to 
-		make certain functions easier.
-Version: 0.0.2
+		This package relies on 'rmarkdown' partials, also know as child documents in
+		knitr, so you can make components for HTML, PDF, and Word documents. 
+		It provides various helper functions to make certain functions easier. 
+		You may want to use this package, if you want to flexibly summarise objects 
+		using a combination of figures, tables, text, and HTML widgets. 
+		Unlike HTML widgets, the output is Markdown and can hence be turn into other
+		output formats than HTML.
+Version: 0.1.0
 Authors@R: person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre"))
 Depends: R (>= 3.0.1)
 Language: en_GB
@@ -20,8 +24,7 @@ Imports:
 Suggests:
   testthat,
   roxygen2,
-  rmarkdown,
-  ggplot2 (>= 2.0.0)
+  rmarkdown
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

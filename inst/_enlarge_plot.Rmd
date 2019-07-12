@@ -1,6 +1,7 @@
 ```{r rmdpartialsetup,eval=TRUE,echo=FALSE}
 if (exists("testing")) {
-	plot <- ggplot2::qplot(1:10)
+	plot <- plot(1:100)
+	large_plot <- plot(1:100)
 	name <- "test_plot"
 }
 ```
