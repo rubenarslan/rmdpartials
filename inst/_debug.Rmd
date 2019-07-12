@@ -1,0 +1,52 @@
+<details>
+
+<summary>Debug</summary>
+
+Working directory
+```{r}
+getwd()
+```
+
+Knitr Output.dir
+```{r}
+knitr::opts_knit$get("output.dir")
+```
+
+Child mode
+```{r}
+knitr::opts_knit$get("child")
+```
+
+
+Viewer null
+```{r}
+is.null(getOption("viewer"))
+```
+
+in temp dir
+```{r}
+!is.null(knitr::opts_knit$get("output.dir")) &&
+  !identical(knitr::opts_knit$get("output.dir"), getwd())
+```
+
+<details>
+
+<summary>opts_knit</summary>
+```{r}
+print(knitr::opts_knit$get())
+```
+
+</details>
+
+
+<details>
+
+<summary>opts_chunk</summary>
+```{r}
+print(knitr::opts_chunk$get())
+```
+
+</details>
+
+</details>
+

@@ -14,3 +14,8 @@
 \description{
 Print new lines in \code{knit_asis} outputs
 }
+\examples{
+text <- paste(c("### Headline",
+"Text"), collapse = "\\n")
+knitr::asis_output(text)
+}

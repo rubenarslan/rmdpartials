@@ -2,6 +2,7 @@
 
 S3method(print,knit_asis)
 export(enlarge_plot)
+export(knit_child_debug)
 export(partial)
 export(paste.knit_asis)
 export(regression_diagnostics)

@@ -21,20 +21,34 @@ paste.knit_asis <- function(..., sep = "\n\n\n", collapse = "\n\n\n") {
 #' @param ... ignored
 #'
 #' @export
+#' @examples
+#' text <- paste(c("### Headline",
+#' "Text"), collapse = "\n")
+#' knitr::asis_output(text)
 print.knit_asis <- function(x, ...) {
-  cat(x, sep = '\n')
-}
+  viewer <- getOption("viewer")
+  if (!is.null(viewer)) {
+    www_dir <- tempfile("viewhtml")
+    dir.create(www_dir)
+    input_file_md <- file.path(www_dir, "index.md")
+    cat(x, file = input_file_md)
+    output_file_html <- file.path(www_dir, "index.html")
 
-
-write_to_file <- function(..., name = NULL, ext = ".Rmd") {
-  if (is.null(name)) {
-    filename <- paste0(tempfile(), ext)
+    if (requireNamespace("rmarkdown", quietly = TRUE)) {
+      utils::capture.output(path <- suppressMessages(
+        rmarkdown::render(input_file_md, output_file = output_file_html,
+                          rmarkdown::html_document()))
+      )
+      viewer(path)
+    } else {
+      warning("The partial was not shown in the viewer, because rmarkdown is ",
+              "not installed.")
+    }
   } else {
-    filename <- paste0(name, ext)
+    message("No viewer found, probably checking")
+    cat(x)
   }
-  mytext <- eval(...)
-  write(mytext, filename)
-  return(filename)
+  invisible(x)
 }
 
 

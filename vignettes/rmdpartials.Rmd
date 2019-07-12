@@ -3,7 +3,8 @@ title: "Rmarkdown partial example"
 author: "Ruben Arslan"
 date: "2019-07-12"
 output:
-  html_document
+  html_document:
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{Rmarkdown partial example}
   \%VignetteKeyword{rmdpartials}
@@ -16,7 +17,8 @@ vignette: >
 For example, you can make enlarge-able plots:
 
 ```{r echo=FALSE}
-knitr::opts_knit$set(child = TRUE)
+# knitr::opts_knit$set(child = TRUE)
+set.seed(1)
 ```
 
 ## Graphical relationship

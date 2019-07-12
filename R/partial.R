@@ -41,22 +41,17 @@ partial <- function(input = NULL, text = NULL, ...,
                             use_strings = TRUE) {
 
   # allow duplicate chunk labels in knitr, useful for knit_child
+  dupes <- getOption("knitr.duplicate.label")
   options(knitr.duplicate.label = 'allow')
+  on.exit(options(knitr.duplicate.label = dupes))
+
+  knit_options <- list()
 
   stopifnot( xor(is.null(text), is.null(input)))
 
   if (!is.null(input) && use_strings) {
     text <- paste0(readLines(input), collapse = "\n")
     input <- NULL
-  }
-
-  child_mode <- knitr::opts_knit$get("child")
-  if (child_mode) {
-    child <- knitr::opts_knit$get("child")
-    knitr::opts_knit$set(child = TRUE)
-    on.exit(knitr::opts_knit$set(child = child))
-  } else {
-    child <- !interactive()
   }
 
   if (is.null(options)) {
@@ -70,57 +65,66 @@ partial <- function(input = NULL, text = NULL, ...,
     )
   }
 
-  output_file_md <- NULL
-  if (!child) {
+  stopifnot(is.list(options))
+
+  # unfortunately opts_knit child is not always set if the child is not called
+  # via a chunk option
+  child <- knitr::opts_knit$get("child")
+
+  # so we build our own
+  ## if there is a viewer available, we are probably in RStudio and not knitting
+  viewer <- getOption("viewer")
+
+  ## if we are not in the working directory, we have presumably already started
+  ## knitting in a temporary directory
+  in_tmp_dir <- !is.null(knitr::opts_knit$get("output.dir")) &&
+    !identical(knitr::opts_knit$get("output.dir"), getwd())
+
+
+  child_mode <- child || is.null(viewer) || in_tmp_dir
+
+  if (child_mode) {
+    knit_options$child <- TRUE
+    if (is.null(knitr::opts_knit$get("output.dir"))) {
+      knit_options$output.dir <- getwd()
+    }
+  } else {
     www_dir <- tempfile("viewhtml")
     dir.create(www_dir)
-    options$base.dir <- www_dir
-    options <- list(
-      fig.path = paste0(www_dir, "/", knitr::opts_chunk$get("fig.path"), safe_name, "_"),
-      cache.path = paste0(www_dir, "/", knitr::opts_chunk$get("cache.path"), safe_name, "_")
-    )
-    output_file_md <- file.path(www_dir, "index.md")
-    output_file_html <- file.path(www_dir, "index.html")
+    knit_options$base.dir <- www_dir
+    knit_options$output.dir <- www_dir
+    options$fig.path <- paste0(www_dir, "/",
+                              knitr::opts_chunk$get("fig.path"), safe_name, "_")
+    options$cache.path <- paste0(www_dir, "/",
+                            knitr::opts_chunk$get("cache.path"), safe_name, "_")
   }
 
-  if (is.list(options)) {
-    options$label <- options$child <- NULL
-    if (length(options)) {
-      optc <- knitr::opts_chunk$get(names(options), drop = FALSE)
-      knitr::opts_chunk$set(options)
-      on.exit({
-        for (i in names(options)) if (identical(options[[i]],
-                      knitr::opts_chunk$get(i))) knitr::opts_chunk$set(optc[i])
-      }, add = TRUE)
-    }
-  }
+  # handle chunk options
+  options$label <- options$child <- NULL
+  options$echo <- show_code
+  optc <- knitr::opts_chunk$get(names(options), drop = FALSE)
+  knitr::opts_chunk$set(options)
+  on.exit({
+    for (i in names(options)) if (identical(options[[i]],
+                  knitr::opts_chunk$get(i))) knitr::opts_chunk$set(optc[i])
+  }, add = TRUE)
+
+  # handle knit options
+  optk <- knitr::opts_knit$get(names(knit_options), drop = FALSE)
+  knitr::opts_knit$set(knit_options)
+  on.exit({
+      for (i in names(knit_options)) if (identical(knit_options[[i]],
+                    knitr::opts_knit$get(i))) knitr::opts_knit$set(optk[i])
+  }, add = TRUE)
 
   encode <- knitr::opts_knit$get("encoding")
   if (is.null(encode)) {
     encode <- getOption("encoding")
   }
 
-  chunk_echo <- knitr::opts_chunk$get("echo")
-  knitr::opts_chunk$set(echo = show_code)
-  res <- knitr::knit(input = input, output = output_file_md, text = text, ...,
+  res <- knitr::knit(input = input, output = NULL, text = text, ...,
                      quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
                      envir = envir, encoding = encode)
-  knitr::opts_chunk$set(echo = chunk_echo)
 
-  output <- knitr::asis_output(paste(c("", res), collapse = "\n"))
-  if (child) {
-    output
-  } else {
-    if (requireNamespace("rmarkdown", quietly = TRUE)) {
-      path <- utils::capture.output(suppressMessages(rmarkdown::render(res,
-                          output_file = output_file_html,
-                          rmarkdown::html_document())))
-      viewer <- getOption("viewer", utils::browseURL)
-      viewer(path)
-    } else {
-      warning("The partial was not shown in the viewer, because rmarkdown is ",
-              "not installed.")
-    }
-    invisible(output)
-  }
+  knitr::asis_output(paste(c("", res), collapse = "\n"))
 }
