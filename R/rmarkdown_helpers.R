@@ -1,21 +1,4 @@
-#' Paste and output as is (render markup)
-#'
-#' Helper function for `knit_asis` objects, useful when e.g. [partial()] was used in a loop.
-#'
-#' Works like [base::paste()] with both the sep and the collapse argument set to two empty lines
-#'
-#' @param ... passed to [base::paste()]
-#' @param sep defaults to two empty lines, passed to [base::paste()]
-#' @param collapse defaults to two empty lines, passed to [base::paste()]
-#'
-#' @export
-#' @examples
-#' paste.knit_asis("# Headline 1", "## Headline 2")
-paste.knit_asis <- function(..., sep = "\n\n\n", collapse = "\n\n\n") {
-  knitr::asis_output(paste(..., sep = sep, collapse = collapse))
-}
-
-#' Print new lines in `knit_asis` outputs
+#' Print `knit_asis` as rendered HTML in the viewer
 #'
 #' @param x the knit_asis object
 #' @param ... ignored
@@ -51,6 +34,24 @@ print.knit_asis <- function(x, ...) {
   invisible(x)
 }
 
+#' Paste and output as is (render markup)
+#'
+#' Helper function for `knit_asis` objects, useful when e.g. [partial()] was used in a loop.
+#'
+#' Works like [base::paste()] with both the sep and the collapse argument set to two empty lines
+#'
+#' @param ... passed to [base::paste()]
+#' @param sep defaults to two empty lines, passed to [base::paste()]
+#' @param collapse defaults to two empty lines, passed to [base::paste()]
+#'
+#' @export
+#' @examples
+#' paste.knit_asis("# Headline 1", "## Headline 2")
+paste.knit_asis <- function(..., sep = "\n\n\n", collapse = "\n\n\n") {
+  knitr::asis_output(paste(..., sep = sep, collapse = collapse))
+}
+
+
 
 require_file <- function(file, package = 'rmdpartials') {
   system.file(file, package = package, mustWork = TRUE)
@@ -81,3 +82,4 @@ recursive_escape <- function(x, depth = 0, max_depth = 4,
 safe_name <- function(x) {
   gsub("[^[:alnum:]]", "_", x)
 }
+
