@@ -20,3 +20,5 @@ tests
 paper.bib
 paper.md
 revdep
+renv
+^renv$
