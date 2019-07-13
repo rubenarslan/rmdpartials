@@ -11,7 +11,7 @@ Description:
 Version: 0.1.0
 Authors@R: person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre"))
 Depends: R (>= 3.0.1)
-Language: en_GB
+Language: en-GB
 URL: https://github.com/rubenarslan/rmdpartials
 BugReports: https://github.com/rubenarslan/rmdpartials/issues
 License: MIT + file LICENSE
@@ -22,9 +22,11 @@ Imports:
 	knitr,
   htmltools
 Suggests:
-  testthat,
-  roxygen2,
-  rmarkdown
+    testthat,
+    roxygen2,
+    rmarkdown,
+    covr,
+    spelling
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
