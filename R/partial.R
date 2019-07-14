@@ -73,7 +73,7 @@ partial <- function(input = NULL, text = NULL, ...,
 
   # so we build our own
   ## if there is a viewer available, we are probably in RStudio and not knitting
-  viewer <- getOption("viewer")
+  not_interactive <- !is_interactive()
 
   ## if we are not in the working directory, we have presumably already started
   ## knitting in a temporary directory
@@ -81,7 +81,7 @@ partial <- function(input = NULL, text = NULL, ...,
     !identical(knitr::opts_knit$get("output.dir"), getwd())
 
 
-  child_mode <- child || is.null(viewer) || in_tmp_dir
+  child_mode <- child || not_interactive || in_tmp_dir
 
   if (child_mode) {
     knit_options$child <- TRUE
@@ -127,4 +127,18 @@ partial <- function(input = NULL, text = NULL, ...,
                      envir = envir, encoding = encode)
 
   knitr::asis_output(paste(c("", res), collapse = "\n"))
+}
+
+is_interactive <- function()
+  {
+  if (identical(getOption("knitr.in.progress"), TRUE)) {
+    return(FALSE)
+  }
+  if (identical(getOption("rstudio.notebook.executing"), TRUE)) {
+    return(FALSE)
+  }
+  if (identical(Sys.getenv("TESTTHAT"), "true")) {
+    return(FALSE)
+  }
+  interactive()
 }

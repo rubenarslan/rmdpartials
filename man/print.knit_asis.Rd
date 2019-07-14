@@ -2,7 +2,7 @@
 % Please edit documentation in R/rmarkdown_helpers.R
 \name{print.knit_asis}
 \alias{print.knit_asis}
-\title{Print new lines in \code{knit_asis} outputs}
+\title{Print \code{knit_asis} as rendered HTML in the viewer}
 \usage{
 \method{print}{knit_asis}(x, ...)
 }
@@ -12,7 +12,7 @@
 \item{...}{ignored}
 }
 \description{
-Print new lines in \code{knit_asis} outputs
+Print \code{knit_asis} as rendered HTML in the viewer
 }
 \examples{
 text <- paste(c("### Headline",

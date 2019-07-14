@@ -83,3 +83,25 @@ safe_name <- function(x) {
   gsub("[^[:alnum:]]", "_", x)
 }
 
+
+function ()
+{
+  opt <- peek_option("rlang_interactive")
+  if (!is_null(opt)) {
+    if (!is_bool(opt)) {
+      options(rlang_interactive = NULL)
+      abort("`rlang_interactive` must be a single `TRUE` of `FALSE`")
+    }
+    return(opt)
+  }
+  if (is_true(peek_option("knitr.in.progress"))) {
+    return(FALSE)
+  }
+  if (is_true(peek_option("rstudio.notebook.executing"))) {
+    return(FALSE)
+  }
+  if (identical(Sys.getenv("TESTTHAT"), "true")) {
+    return(FALSE)
+  }
+  interactive()
+}

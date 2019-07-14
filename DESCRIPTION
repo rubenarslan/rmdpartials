@@ -25,6 +25,7 @@ Suggests:
     testthat,
     roxygen2,
     rmarkdown,
+    pkgdown,
     covr,
     spelling
 Encoding: UTF-8
