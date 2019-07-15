@@ -43,12 +43,12 @@ remotes::install_github("rubenarslan/rmdpartials")
 Define a function like this:
 
 ``` r
-enlarge_plot <- function(object) {
+my_summary <- function(object) {
   rmdpartials::partial("_my_summary.Rmd")
 }
 ```
 
-And create a file called `_my_summary.Rmd`.
+And create a file called `_my_summary.Rmd` with contents like this:
 
     ## My special summary
     
@@ -63,11 +63,33 @@ And create a file called `_my_summary.Rmd`.
 
 ## Usage
 
-To use a partial in an rmarkdown report
+To use the partial in an rmarkdown report
 
     ```{r}
     m1 <- lm(y ~ x, data = data)
-    your_partial(m1)
+    my_summary(m1)
     ```
+
+### Usage as a knit\_print method
+
+To make your partial the default printing option for objects of a
+certain class when they are echoed in a knitr document, give it the name
+of a knit\_print method.
+
+``` r
+knit_print.lm <- function(object) {
+  rmdpartials::partial("_my_summary.Rmd")
+}
+```
+
+Now, all you need to is let the lm object be echoed.
+
+    ```{r}
+    m1 <- lm(y ~ x, data = data)
+    m1
+    ```
+
+You can also preview what the result from the partial would look like by
+calling it in an interactive session.
 
 ## [Code of conduct for contributing](CONDUCT.md)
