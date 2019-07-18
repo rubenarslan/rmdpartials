@@ -56,7 +56,10 @@ partial <- function(input = NULL, text = NULL, ...,
 
   if (is.null(options)) {
     if (is.null(name)) {
-      name <- digest::digest(stats::runif(1))
+      # xxx <- function(...) {
+      #   digest::digest(list(...))
+      # }
+      name <- substr(digest::digest(stats::runif(1)), 1, 10)
     }
     safe_name <- safe_name(name)
     options <- list(

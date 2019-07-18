@@ -1,0 +1,40 @@
+```{r rmdpartialsetup,eval=TRUE,echo=FALSE}
+if (exists("testing")) {
+  data("ChickWeight")
+  regression <- lm(weight ~ Time, data = ChickWeight)
+}
+```
+
+# Merge info
+
+There are <big>`r x_duplicates`</big> duplicated rows in `r x_name` out of `r x_rows` total rows.
+
+There are <big>`r y_duplicates`</big> duplicated rows in `r y_name` out of `r y_rows` total rows.
+
+<details>
+<summary>`r nrow(in_x_and_y)` rows overlap between `r x_name` and `r y_name`</summary>
+
+```{r}
+DT::datatable(in_x_and_y)
+```
+
+</details>
+
+<details>
+<summary>`r nrow(in_x_not_y)` rows are in `r x_name` but have no corresponding rows in `r y_name`</summary>
+
+```{r}
+knitr::kable(in_x_not_y)
+```
+
+</details>
+
+<details>
+<summary>`r nrow(in_y_not_x)` rows are in `r y_name` but have no corresponding rows in `r x_name`</summary>
+
+```{r}
+knitr::kable(in_y_not_x)
+```
+
+</details>
+

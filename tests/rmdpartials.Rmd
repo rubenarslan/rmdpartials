@@ -4,12 +4,7 @@ author: "Ruben Arslan"
 date: "2019-07-12"
 output:
   html_document:
-    self_contained: false
-vignette: >
-  %\VignetteIndexEntry{Rmarkdown partial example}
-  \%VignetteKeyword{rmdpartials}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+    self_contained: true
 ---
 
 # Introduction
@@ -38,7 +33,13 @@ regression_diagnostics(reg)
 ## Predict what happens when you join two data frames
 
 ```{r}
+options(knitr.duplicate.label = 'allow')
+
 library(dplyr)
+DT::datatable(band_members)
+```
+
+```{r}
 join_sets(band_members, band_instruments)
 ```
 
