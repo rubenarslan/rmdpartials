@@ -10,7 +10,10 @@
 #' @examples
 #' # will generate figures in a temporary directory
 #' if (requireNamespace("dplyr", quietly = TRUE)) {
-#'    join_sets(band_members, band_instruments)
+#'    data("band_members", package = "dplyr")
+#'    data("band_instruments", package = "dplyr")
+#'    band_instruments2 <- dplyr::bind_rows(band_instruments, band_instruments[1,])
+#'    join_sets(band_members, band_instruments2)
 #' }
 join_sets <- function(x, y, by = NULL, ...) {
 
@@ -39,7 +42,7 @@ join_sets <- function(x, y, by = NULL, ...) {
       dplyr::group_by(y, !!!rlang::syms(unname(by))),
                                        dplyr::n() > 1))
 
-    codebook::asis_knit_child(require_file("_join_sets.Rmd"))
+    partial(require_file("_join_sets.Rmd"))
   } else {
     warning("dplyr, rlang, and DT are required to use this function")
   }

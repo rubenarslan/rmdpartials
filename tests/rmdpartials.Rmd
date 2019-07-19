@@ -7,7 +7,8 @@ output:
     self_contained: true
 ---
 
-# Introduction
+
+
 
 For example, you can make enlarge-able plots:
 
@@ -33,10 +34,7 @@ regression_diagnostics(reg)
 ## Predict what happens when you join two data frames
 
 ```{r}
-options(knitr.duplicate.label = 'allow')
-
 library(dplyr)
-DT::datatable(band_members)
 ```
 
 ```{r}

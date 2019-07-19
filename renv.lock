@@ -558,6 +558,12 @@ Version=0.2.2
 Source=CRAN
 Hash=a230d72a95d16715973ad2ae0664cfc0
 
+[R/Package/leaflet]
+Package=leaflet
+Version=2.0.2
+Source=CRAN
+Hash=b358f598d0beb71b33ca6ba2ce574884
+
 [R/Package/likert]
 Package=likert
 Version=1.3.5
@@ -774,6 +780,12 @@ Version=1.8.4
 Source=CRAN
 Hash=22a149ed250857f9159e7ed078ea94a6
 
+[R/Package/png]
+Package=png
+Version=0.1-7
+Source=CRAN
+Hash=ef32889065e818c2331e9f43b7e20bac
+
 [R/Package/praise]
 Package=praise
 Version=1.0.0
@@ -839,6 +851,12 @@ Package=rappdirs
 Version=0.3.1
 Source=CRAN
 Hash=48312ab82b6c1602b83211ee500f783d
+
+[R/Package/raster]
+Package=raster
+Version=2.9-23
+Source=CRAN
+Hash=2939b1e55c3ad20715c9239119eb0e21
 
 [R/Package/rcmdcheck]
 Package=rcmdcheck
@@ -1037,6 +1055,12 @@ Package=tibble
 Version=2.1.3
 Source=CRAN
 Hash=5c9738ae12a6d352b0b0477dc023f473
+
+[R/Package/tidylog]
+Package=tidylog
+Version=0.1.0
+Source=CRAN
+Hash=3408cd86dc324e43caa81617dd1a6af0
 
 [R/Package/tidyr]
 Package=tidyr

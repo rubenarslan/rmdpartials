@@ -14,9 +14,16 @@ There are <big>`r y_duplicates`</big> duplicated rows in `r y_name` out of `r y_
 <details>
 <summary>`r nrow(in_x_and_y)` rows overlap between `r x_name` and `r y_name`</summary>
 
+
 ```{r}
-DT::datatable(in_x_and_y)
+if (nrow(in_x_and_y) > 200) {
+  in_x_and_y <- head(in_x_not_y, 200)
+  message("Only first 200 rows shown")
+}
+DT::datatable(in_x_and_y, filter = "top",
+              rownames = FALSE)
 ```
+
 
 </details>
 
@@ -24,7 +31,12 @@ DT::datatable(in_x_and_y)
 <summary>`r nrow(in_x_not_y)` rows are in `r x_name` but have no corresponding rows in `r y_name`</summary>
 
 ```{r}
-knitr::kable(in_x_not_y)
+if (nrow(in_x_not_y) > 200) {
+  in_x_not_y <- head(in_x_not_y, 200)
+  message("Only first 200 rows shown")
+}
+DT::datatable(in_x_not_y, filter = "top",
+              rownames = FALSE)
 ```
 
 </details>
@@ -33,8 +45,28 @@ knitr::kable(in_x_not_y)
 <summary>`r nrow(in_y_not_x)` rows are in `r y_name` but have no corresponding rows in `r x_name`</summary>
 
 ```{r}
-knitr::kable(in_y_not_x)
+if (nrow(in_y_not_x) > 200) {
+  in_y_not_x <- head(in_y_not_x, 200)
+  message("Only first 200 rows shown")
+}
+DT::datatable(in_y_not_x, filter = "top",
+              rownames = FALSE)
 ```
 
 </details>
 
+
+<!-- ```{r} -->
+<!-- DT::datatable(dplyr::bind_rows(in_x_and_y, in_x_not_y, in_y_not_x, .id = "set")) -->
+<!-- ``` -->
+
+<script>
+  $(function() {
+    $('details').on('toggle', function() {
+      if(this.open) {
+        // jquery $('window').resize or $('window').trigger('resize') do not work
+        window.dispatchEvent(new Event('resize'));
+      }
+    })
+  })
+</script>

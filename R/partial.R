@@ -55,20 +55,26 @@ partial <- function(input = NULL, text = NULL, ...,
   }
 
   if (is.null(options)) {
-    if (is.null(name)) {
-      # xxx <- function(...) {
-      #   digest::digest(list(...))
-      # }
-      name <- substr(digest::digest(stats::runif(1)), 1, 10)
-    }
-    safe_name <- safe_name(name)
-    options <- list(
-      fig.path = paste0(knitr::opts_chunk$get("fig.path"), safe_name, "_"),
-      cache.path = paste0(knitr::opts_chunk$get("cache.path"), safe_name, "_")
-    )
+    options <- list()
+  }
+  stopifnot(is.list(options))
+
+  if (is.null(name)) {
+    # xxx <- function(...) {
+    #   digest::digest(list(...))
+    # }
+    name <- substr(digest::digest(stats::runif(1)), 1, 10)
+  }
+  safe_name <- safe_name(name)
+  if (is.null(options$fig.path)) {
+    options$fig.path <- paste0(
+      knitr::opts_chunk$get("fig.path"), safe_name, "_")
+  }
+  if (is.null(options$cache.path)) {
+    options$cache.path <- paste0(
+      knitr::opts_chunk$get("cache.path"), safe_name, "_")
   }
 
-  stopifnot(is.list(options))
 
   # unfortunately opts_knit child is not always set if the child is not called
   # via a chunk option
@@ -100,6 +106,7 @@ partial <- function(input = NULL, text = NULL, ...,
                               knitr::opts_chunk$get("fig.path"), safe_name, "_")
     options$cache.path <- paste0(www_dir, "/",
                             knitr::opts_chunk$get("cache.path"), safe_name, "_")
+    options$screenshot.force <- FALSE
   }
 
   # handle chunk options
@@ -129,7 +136,9 @@ partial <- function(input = NULL, text = NULL, ...,
                      quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
                      envir = envir, encoding = encode)
 
-  knitr::asis_output(paste(c("", res), collapse = "\n"))
+  part <- knitr::asis_output(paste(c("", res), collapse = "\n"))
+  attributes(part)$output.dir <- knit_options$output.dir
+  part
 }
 
 is_interactive <- function()

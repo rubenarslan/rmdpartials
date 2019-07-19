@@ -11,13 +11,18 @@
 print.knit_asis <- function(x, ...) {
   viewer <- getOption("viewer")
   if (!is.null(viewer)) {
-    www_dir <- tempfile("viewhtml")
-    dir.create(www_dir)
+    if (is.null(attributes(x)$output.dir)) {
+      www_dir <- tempfile("viewhtml")
+      dir.create(www_dir)
+    } else {
+      www_dir <- attributes(x)$output.dir
+    }
     input_file_md <- file.path(www_dir, "index.md")
     cat(x, file = input_file_md)
     output_file_html <- file.path(www_dir, "index.html")
 
     if (requireNamespace("rmarkdown", quietly = TRUE)) {
+      knitr::opts_chunk$set(screenshot.force = FALSE)
       utils::capture.output(path <- suppressMessages(
         rmarkdown::render(input_file_md, output_file = output_file_html,
                           rmarkdown::html_document()))
