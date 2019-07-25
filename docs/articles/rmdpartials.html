@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -65,7 +65,13 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+      </header><script src="rmdpartials_files/htmlwidgets-1.3/htmlwidgets.js"></script><script src="rmdpartials_files/jquery-1.12.4/jquery.min.js"></script><link href="rmdpartials_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="rmdpartials_files/datatables-binding-0.7/datatables.js"></script><link href="rmdpartials_files/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="rmdpartials_files/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="rmdpartials_files/dt-core-1.10.16/js/jquery.dataTables.min.js"></script><link href="rmdpartials_files/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+<script src="rmdpartials_files/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="rmdpartials_files/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+<script src="rmdpartials_files/selectize-0.12.0/selectize.min.js"></script><link href="rmdpartials_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet">
+<script src="rmdpartials_files/crosstalk-1.0.0/js/crosstalk.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Rmarkdown partial example</h1>
@@ -92,13 +98,13 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3">y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">100</span>) <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="../reference/enlarge_plot.html">enlarge_plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(x, y), <span class="dt">large_plot =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(x, y), <span class="dt">plot_name =</span> <span class="st">"myplot"</span>)</a></code></pre></div>
 <!-- Button trigger modal -->
-<p><a href="#myplot" data-toggle="modal" data-target="#myplot"> <img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-4-1.png" width="192"></a></p>
+<p><a href="#myplot" data-toggle="modal" data-target="#myplot"> <img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-5-1.png" width="192"></a></p>
 <!-- Modal -->
 <div id="myplot" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myplotLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-body">
-<p><img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="rmdpartials_files/figure-html/myplot_unnamed-chunk-6-1.png" width="672"></p>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -132,13 +138,13 @@ Close
 </table>
 <p>Values vs. fitted values.</p>
 <!-- Button trigger modal -->
-<p><a href="#f080a7cff67d0703e82af142e5e9fdd2" data-toggle="modal" data-target="#f080a7cff67d0703e82af142e5e9fdd2"> <img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_f080a7cff67d0703e82af142e5e9fdd2_unnamed-chunk-11-1.png" width="192"></a></p>
+<p><a href="#f080a7cff67d0703e82af142e5e9fdd2" data-toggle="modal" data-target="#f080a7cff67d0703e82af142e5e9fdd2"> <img src="rmdpartials_files/figure-html/726ffe1a09_f080a7cff67d0703e82af142e5e9fdd2_unnamed-chunk-12-1.png" width="192"></a></p>
 <!-- Modal -->
 <div id="f080a7cff67d0703e82af142e5e9fdd2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="f080a7cff67d0703e82af142e5e9fdd2Label" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-body">
-<p><img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_f080a7cff67d0703e82af142e5e9fdd2_unnamed-chunk-12-1.png" width="672"></p>
+<p><img src="rmdpartials_files/figure-html/726ffe1a09_f080a7cff67d0703e82af142e5e9fdd2_unnamed-chunk-13-1.png" width="672"></p>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -149,9 +155,45 @@ Close
 </div>
 </div>
 <details><p><summary>Diagnostics (click to show)</summary></p>
-<p><img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_unnamed-chunk-9-1.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_unnamed-chunk-9-2.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_unnamed-chunk-9-3.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09c50f642011e1cab71d56d6_unnamed-chunk-9-4.png" width="700"></p>
+<p><img src="rmdpartials_files/figure-html/726ffe1a09_unnamed-chunk-10-1.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_unnamed-chunk-10-2.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_unnamed-chunk-10-3.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_unnamed-chunk-10-4.png" width="700"></p>
 </details>
 </div>
+<div id="predict-what-happens-when-you-join-two-data-frames" class="section level2">
+<h2 class="hasAnchor">
+<a href="#predict-what-happens-when-you-join-two-data-frames" class="anchor"></a>Predict what happens when you join two data frames</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/join_sets.html">join_sets</a></span>(band_members, band_instruments)</a></code></pre></div>
+</div>
+</div>
+<div id="merge-info" class="section level1">
+<h1 class="hasAnchor">
+<a href="#merge-info" class="anchor"></a>Merge info</h1>
+<p>There are <big>0</big> duplicated rows in band_members out of 3 total rows.</p>
+<p>There are <big>0</big> duplicated rows in band_instruments out of 3 total rows.</p>
+<details><p><summary>2 rows overlap between band_members and band_instruments</summary></p>
+<div id="htmlwidget-e5f1b95ec702f0fe5bbf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e5f1b95ec702f0fe5bbf">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["John","Paul"],["Beatles","Beatles"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>band<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script></details><details><p><summary>1 rows are in band_members but have no corresponding rows in band_instruments</summary></p>
+<div id="htmlwidget-cab4797e4eb1d26f83a9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cab4797e4eb1d26f83a9">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["Mick"],["Stones"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>band<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script></details><details><p><summary>1 rows are in band_instruments but have no corresponding rows in band_members</summary></p>
+<div id="htmlwidget-24586715eed6e1ef1260" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-24586715eed6e1ef1260">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["Mick"],["Stones"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>band<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script></details><script>
+  $(function() {
+    $('details').on('toggle', function() {
+      if(this.open) {
+        // jquery $('window').resize or $('window').trigger('resize') do not work
+        window.dispatchEvent(new Event('resize'));
+      }
+    })
+  })
+</script>
 </div>
   </div>
 
@@ -164,8 +206,10 @@ Close
 <a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#graphical-relationship">Graphical relationship</a></li>
       <li><a href="#regression">Regression</a></li>
+      <li><a href="#predict-what-happens-when-you-join-two-data-frames">Predict what happens when you join two data frames</a></li>
       </ul>
 </li>
+      <li><a href="#merge-info">Merge info</a></li>
       </ul>
 </div>
       </div>
@@ -174,7 +218,7 @@ Close
 
 
       <footer><div class="copyright">
-  <p>Developed by Ruben Arslan.</p>
+  <p>Developed by Ruben Arslan, Gjalt-Jorn Peters.</p>
 </div>
 
 <div class="pkgdown">
