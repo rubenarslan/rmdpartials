@@ -41,6 +41,8 @@ partial <- function(input = NULL, text = NULL, ...,
                             use_strings = TRUE) {
 
   # allow duplicate chunk labels in knitr, useful for knit_child
+  envir <- envir # if I don't do this, rmarkdown somehow doesn't use the right
+  # environment for some reason (knitr does)
   dupes <- getOption("knitr.duplicate.label")
   options(knitr.duplicate.label = 'allow')
   on.exit(options(knitr.duplicate.label = dupes))
@@ -98,15 +100,19 @@ partial <- function(input = NULL, text = NULL, ...,
       knit_options$output.dir <- getwd()
     }
   } else {
-    www_dir <- tempfile("viewhtml")
+    www_dir <- tempfile("preview_partial")
     dir.create(www_dir)
     knit_options$base.dir <- www_dir
     knit_options$output.dir <- www_dir
+    input_file_rmd <- file.path(www_dir, "index.Rmd")
+    output_file_md <- file.path(www_dir, "index.knit.md")
+    output_file_html <- file.path(www_dir, "index.html")
     options$fig.path <- paste0(www_dir, "/",
                               knitr::opts_chunk$get("fig.path"), safe_name, "_")
     options$cache.path <- paste0(www_dir, "/",
                             knitr::opts_chunk$get("cache.path"), safe_name, "_")
-    options$screenshot.force <- FALSE
+    knit_options$rmarkdown.pandoc.to <- "html"
+    # options$screenshot.force <- FALSE
   }
 
   # handle chunk options
@@ -132,13 +138,34 @@ partial <- function(input = NULL, text = NULL, ...,
     encode <- getOption("encoding")
   }
 
-  res <- knitr::knit(input = input, output = NULL, text = text, ...,
-                     quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
-                     envir = envir, encoding = encode)
+  knit_meta <- NULL
+  if (child_mode) {
+    res <- knitr::knit(input = input, output = NULL, text = text, ...,
+                       quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
+                       envir = envir, encoding = encode)
+  } else {
+    cat(text, file = input_file_rmd)
+    knit_meta <- list()
+    knit_meta$output.dir <- knit_options$output.dir
 
-  part <- knitr::asis_output(paste(c("", res), collapse = "\n"))
-  attributes(part)$output.dir <- knit_options$output.dir
-  part
+    if (requireNamespace("rmarkdown", quietly = TRUE)) {
+      # knitr::opts_chunk$set(screenshot.force = FALSE)
+      path <- utils::capture.output(path <- suppressMessages(
+        rmarkdown::render(input_file_rmd, output_file = output_file_html,
+                          envir = envir, encoding = encode, clean = FALSE,
+                          rmarkdown::html_document(self_contained = FALSE))
+      ))
+    } else {
+      warning("The partial was not shown in the viewer, because rmarkdown is ",
+              "not installed.")
+    }
+
+    res <- paste0(readLines(output_file_md), collapse = "\n")
+  }
+
+
+  knitr::asis_output(paste(c("", res), collapse = "\n"),
+                            meta = knit_meta)
 }
 
 is_interactive <- function()

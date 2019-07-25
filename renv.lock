@@ -1134,6 +1134,12 @@ Version=2.0.7
 Source=CRAN
 Hash=9b55e24cf33625cb234349027369bc00
 
+[R/Package/webshot]
+Package=webshot
+Version=0.5.1
+Source=CRAN
+Hash=3468b1884a375c73cdb6908224c11278
+
 [R/Package/whisker]
 Package=whisker
 Version=0.3-2

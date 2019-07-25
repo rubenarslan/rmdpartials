@@ -11,27 +11,34 @@
 print.knit_asis <- function(x, ...) {
   viewer <- getOption("viewer")
   if (!is.null(viewer)) {
-    if (is.null(attributes(x)$output.dir)) {
-      www_dir <- tempfile("viewhtml")
+    if (is.null(attributes(x)$knit_meta)
+        || is.null(attributes(x)$knit_meta$output.dir)) {
+      www_dir <- tempfile("preview_partial")
       dir.create(www_dir)
     } else {
-      www_dir <- attributes(x)$output.dir
+      www_dir <- attributes(x)$knit_meta$output.dir
     }
-    input_file_md <- file.path(www_dir, "index.md")
-    cat(x, file = input_file_md)
     output_file_html <- file.path(www_dir, "index.html")
-
-    if (requireNamespace("rmarkdown", quietly = TRUE)) {
-      knitr::opts_chunk$set(screenshot.force = FALSE)
-      utils::capture.output(path <- suppressMessages(
-        rmarkdown::render(input_file_md, output_file = output_file_html,
-                          rmarkdown::html_document()))
-      )
+    if (file.exists(output_file_html)) {
+      path <- output_file_html
       viewer(path)
     } else {
-      warning("The partial was not shown in the viewer, because rmarkdown is ",
-              "not installed.")
+      input_file_md <- file.path(www_dir, "index.md")
+      cat(x, file = input_file_md)
+
+      if (requireNamespace("rmarkdown", quietly = TRUE)) {
+        # knitr::opts_chunk$set(screenshot.force = FALSE)
+        utils::capture.output(path <- suppressMessages(
+          rmarkdown::render(input_file_md, output_file = output_file_html,
+                            rmarkdown::html_document(self_contained = FALSE)))
+        )
+        viewer(path)
+      } else {
+        warning("The partial was not shown in the viewer, because rmarkdown is ",
+                "not installed.")
+      }
     }
+
   } else {
     message("No viewer found, probably checking")
     cat(x)

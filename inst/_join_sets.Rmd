@@ -55,11 +55,6 @@ DT::datatable(in_y_not_x, filter = "top",
 
 </details>
 
-
-<!-- ```{r} -->
-<!-- DT::datatable(dplyr::bind_rows(in_x_and_y, in_x_not_y, in_y_not_x, .id = "set")) -->
-<!-- ``` -->
-
 <script>
   $(function() {
     $('details').on('toggle', function() {

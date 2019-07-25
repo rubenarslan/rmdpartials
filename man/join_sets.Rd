@@ -21,6 +21,9 @@ Generate a small plot that will be enlarged in a modal when clicked
 \examples{
 # will generate figures in a temporary directory
 if (requireNamespace("dplyr", quietly = TRUE)) {
-   band_members \%>\% join_sets(band_instruments)
+   data("band_members", package = "dplyr")
+   data("band_instruments", package = "dplyr")
+   band_instruments2 <- dplyr::bind_rows(band_instruments, band_instruments[1,])
+   join_sets(band_members, band_instruments2)
 }
 }
