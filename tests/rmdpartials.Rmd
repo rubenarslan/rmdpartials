@@ -31,13 +31,7 @@ reg <- lm(y ~ x)
 regression_diagnostics(reg)
 ```
 
-## Predict what happens when you join two data frames
 
 ```{r}
-library(dplyr)
-```
-
-```{r}
-join_sets(band_members, band_instruments)
 ```
 

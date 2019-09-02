@@ -34,11 +34,3 @@ enlarge_plot(plot(x, y), large_plot = plot(x, y), plot_name = "myplot")
 reg <- lm(y ~ x)
 regression_diagnostics(reg)
 ```
-
-## Predict what happens when you join two data frames
-
-```{r}
-library(dplyr)
-join_sets(band_members, band_instruments)
-```
-
