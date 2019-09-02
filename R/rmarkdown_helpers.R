@@ -18,8 +18,8 @@ print.knit_asis <- function(x, ...) {
     } else {
       www_dir <- attributes(x)$knit_meta$output.dir
     }
-    output_file_html <- file.path(www_dir, "index.html")
-    if (file.exists(output_file_html)) {
+    output_file_html <- attributes(x)$knit_meta$output.file
+    if (!is.null(output_file_html) && file.exists(output_file_html)) {
       path <- output_file_html
       viewer(path)
     } else {
@@ -34,8 +34,8 @@ print.knit_asis <- function(x, ...) {
         )
         viewer(path)
       } else {
-        warning("The partial was not shown in the viewer, because rmarkdown is ",
-                "not installed.")
+        warning("The partial was not shown in the viewer, because rmarkdown is",
+                " not installed.")
       }
     }
 
@@ -94,26 +94,26 @@ recursive_escape <- function(x, depth = 0, max_depth = 4,
 safe_name <- function(x) {
   gsub("[^[:alnum:]]", "_", x)
 }
-
-
-function ()
-{
-  opt <- peek_option("rlang_interactive")
-  if (!is_null(opt)) {
-    if (!is_bool(opt)) {
-      options(rlang_interactive = NULL)
-      abort("`rlang_interactive` must be a single `TRUE` of `FALSE`")
-    }
-    return(opt)
-  }
-  if (is_true(peek_option("knitr.in.progress"))) {
-    return(FALSE)
-  }
-  if (is_true(peek_option("rstudio.notebook.executing"))) {
-    return(FALSE)
-  }
-  if (identical(Sys.getenv("TESTTHAT"), "true")) {
-    return(FALSE)
-  }
-  interactive()
-}
+#
+#
+# function ()
+# {
+#   opt <- peek_option("rlang_interactive")
+#   if (!is_null(opt)) {
+#     if (!is_bool(opt)) {
+#       options(rlang_interactive = NULL)
+#       abort("`rlang_interactive` must be a single `TRUE` of `FALSE`")
+#     }
+#     return(opt)
+#   }
+#   if (is_true(peek_option("knitr.in.progress"))) {
+#     return(FALSE)
+#   }
+#   if (is_true(peek_option("rstudio.notebook.executing"))) {
+#     return(FALSE)
+#   }
+#   if (identical(Sys.getenv("TESTTHAT"), "true")) {
+#     return(FALSE)
+#   }
+#   interactive()
+# }

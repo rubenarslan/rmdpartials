@@ -31,7 +31,18 @@ reg <- lm(y ~ x)
 regression_diagnostics(reg)
 ```
 
+## Write a partial on the fly
+```{r}
+x <- 5
+y <- 9
+partial(text = "`r x` `r y`", input = NULL)
+```
+
+
+## Debug
+Learn about environments in partials.
 
 ```{r}
+knit_child_debug()
 ```
 

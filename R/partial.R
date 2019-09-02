@@ -13,8 +13,9 @@
 #'
 #'
 #' @param input if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)
+#' @param ... ignored, but you can use it to clarify which variables will be used in the rmd partial
 #' @param text passed to [knitr::knit_child()]
-#' @param ... passed to [knitr::knit_child()]
+#' @param output if you specify a file path here, where to put the file
 #' @param quiet passed to [knitr::knit_child()]
 #' @param options defaults to NULL.
 #' @param envir passed to [knitr::knit_child()]
@@ -34,11 +35,12 @@
 #'    partial("_regression_summary.Rmd")
 #' }
 #' }
-partial <- function(input = NULL, text = NULL, ...,
-                            quiet = TRUE, options = NULL,
-                            envir = parent.frame(), name = NULL,
-                            show_code = FALSE,
-                            use_strings = TRUE) {
+partial <- function(input = NULL, ...,
+                    text = NULL, output = NULL,
+                    quiet = TRUE, options = NULL,
+                    envir = parent.frame(), name = NULL,
+                    show_code = FALSE,
+                    use_strings = TRUE) {
 
   # allow duplicate chunk labels in knitr, useful for knit_child
   envir <- envir # if I don't do this, rmarkdown somehow doesn't use the right
@@ -86,13 +88,18 @@ partial <- function(input = NULL, text = NULL, ...,
   ## if there is a viewer available, we are probably in RStudio and not knitting
   not_interactive <- !is_interactive()
 
+  # if an output file is specified
+  if (!is.null(output)) {
+    knitr::opts_knit$set(output.dir = dirname(output))
+  }
+
   ## if we are not in the working directory, we have presumably already started
   ## knitting in a temporary directory
   in_tmp_dir <- !is.null(knitr::opts_knit$get("output.dir")) &&
     !identical(knitr::opts_knit$get("output.dir"), getwd())
 
 
-  child_mode <- child || not_interactive || in_tmp_dir
+  child_mode <- is.null(output) && (child || not_interactive || in_tmp_dir)
 
   if (child_mode) {
     knit_options$child <- TRUE
@@ -100,19 +107,25 @@ partial <- function(input = NULL, text = NULL, ...,
       knit_options$output.dir <- getwd()
     }
   } else {
-    www_dir <- tempfile("preview_partial")
-    dir.create(www_dir)
+    if (!is.null(output)) {
+      www_dir <- dirname(output)
+      file_name <- tools::file_path_sans_ext(basename(output))
+    } else {
+      www_dir <- tempfile("preview_partial")
+      dir.create(www_dir)
+      file_name <- "index"
+    }
+
+    input_file_rmd <- file.path(www_dir, paste0(file_name, ".Rmd"))
+    output_file_md <- file.path(www_dir, paste0(file_name, ".knit.md"))
+    output_file_html <- file.path(www_dir, paste0(file_name, ".html"))
+
     knit_options$base.dir <- www_dir
     knit_options$output.dir <- www_dir
-    input_file_rmd <- file.path(www_dir, "index.Rmd")
-    output_file_md <- file.path(www_dir, "index.knit.md")
-    output_file_html <- file.path(www_dir, "index.html")
     options$fig.path <- paste0(www_dir, "/",
                               knitr::opts_chunk$get("fig.path"), safe_name, "_")
     options$cache.path <- paste0(www_dir, "/",
                             knitr::opts_chunk$get("cache.path"), safe_name, "_")
-    knit_options$rmarkdown.pandoc.to <- "html"
-    # options$screenshot.force <- FALSE
   }
 
   # handle chunk options
@@ -140,19 +153,21 @@ partial <- function(input = NULL, text = NULL, ...,
 
   knit_meta <- NULL
   if (child_mode) {
-    res <- knitr::knit(input = input, output = NULL, text = text, ...,
+    res <- knitr::knit(input = input, output = NULL, text = text,
                        quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
                        envir = envir, encoding = encode)
   } else {
     cat(text, file = input_file_rmd)
     knit_meta <- list()
     knit_meta$output.dir <- knit_options$output.dir
+    knit_meta$output.file <- output_file_html
 
     if (requireNamespace("rmarkdown", quietly = TRUE)) {
       # knitr::opts_chunk$set(screenshot.force = FALSE)
       path <- utils::capture.output(path <- suppressMessages(
         rmarkdown::render(input_file_rmd, output_file = output_file_html,
-                          envir = envir, encoding = encode, clean = FALSE,
+                          envir = envir, encoding = encode,
+                          clean = FALSE,
                           rmarkdown::html_document(self_contained = FALSE))
       ))
     } else {

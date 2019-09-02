@@ -29,6 +29,11 @@ in temp dir
   !identical(knitr::opts_knit$get("output.dir"), getwd())
 ```
 
+objects in this environment
+```{r}
+ls()
+```
+
 <details>
 
 <summary>opts_knit</summary>
