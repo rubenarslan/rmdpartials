@@ -8,7 +8,7 @@ Description:
 		using a combination of figures, tables, text, and HTML widgets. 
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
 		output formats than HTML.
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(
   person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre")),
   person("Gjalt-Jorn", "Peters", email = "gjalt-jorn@userfriendlyscience.com",
@@ -23,8 +23,11 @@ Imports:
 	stats,
 	digest,
 	utils,
+	graphics,
+	grDevices,
 	knitr,
-  htmltools
+  htmltools,
+  rlang
 Suggests:
     testthat,
     roxygen2,
@@ -34,7 +37,7 @@ Suggests:
     spelling,
     dplyr,
     DT,
-    rlang
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

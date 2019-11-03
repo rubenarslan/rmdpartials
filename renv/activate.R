@@ -2,7 +2,14 @@
 local({
 
   # the requested version of renv
-  version <- "0.7.0-17"
+  version <- "0.8.2"
+
+  # signal that we're loading renv during R startup
+  Sys.setenv("RENV_R_INITIALIZING" = "true")
+  on.exit(Sys.unsetenv("RENV_R_INITIALIZING"), add = TRUE)
+
+  # signal that we've consented to use renv
+  options(renv.consent = TRUE)
 
   # load the 'utils' package eagerly -- this ensures that renv shims, which
   # mask 'utils' packages, will come first on the search path
@@ -14,7 +21,7 @@ local({
     # if renv has already been loaded, and it's the requested version of renv,
     # nothing to do
     spec <- .getNamespaceInfo(.getNamespace("renv"), "spec")
-    if (identical(spec$version, version))
+    if (identical(spec[["version"]], version))
       return(invisible(TRUE))
 
     # otherwise, unload and attempt to load the correct version of renv
@@ -22,33 +29,32 @@ local({
 
   }
 
-  # source the user profile if any, respecting R_PROFILE_USER
-  profile <- Sys.getenv("R_PROFILE_USER", unset = path.expand("~/.Rprofile"))
-  if (file.exists(profile)) {
-    current <- normalizePath(".Rprofile", winslash = "/", mustWork = FALSE)
-    if (!identical(profile, current))
-      source(profile)
-  }
+  # construct path to renv in library
+  libpath <- local({
 
-  # figure out root for renv installation
-  default <- switch(
-    Sys.info()[["sysname"]],
-    Darwin  = Sys.getenv("XDG_DATA_HOME", "~/Library/Application Support"),
-    Windows = Sys.getenv("LOCALAPPDATA", "~/.renv"),
-    Sys.getenv("XDG_DATA_HOME", "~/.local/share")
-  )
+    root <- Sys.getenv("RENV_PATHS_LIBRARY", unset = "renv/library")
+    prefix <- paste("R", getRversion()[1, 1:2], sep = "-")
 
-  base <- Sys.getenv("RENV_PATHS_ROOT", unset = file.path(default, "renv"))
-  rversion <- paste("R", getRversion()[1, 1:2], sep = "-")
-  path <- file.path(base, "bootstrap", rversion, R.version$platform, "renv", version)
+    # include SVN revision for development versions of R
+    # (to avoid sharing platform-specific artefacts with released versions of R)
+    devel <-
+      identical(R.version[["status"]],   "Under development (unstable)") ||
+      identical(R.version[["nickname"]], "Unsuffered Consequences")
+
+    if (devel)
+      prefix <- paste(prefix, R.version[["svn rev"]], sep = "-r")
+
+    file.path(root, prefix, R.version$platform)
+
+  })
 
   # try to load renv from one of these paths
-  if (requireNamespace("renv", lib.loc = path, quietly = TRUE))
+  if (requireNamespace("renv", lib.loc = libpath, quietly = TRUE))
     return(renv::load())
 
   # failed to find renv locally; we'll try to install from GitHub.
   # first, set up download options as appropriate (try to use GITHUB_PAT)
-  try({
+  install_renv <- function() {
 
     message("Failed to find installation of renv -- attempting to bootstrap...")
 
@@ -78,6 +84,25 @@ local({
       on.exit(do.call(base::options, saved), add = TRUE)
     }
 
+    # fix up repos
+    repos <- getOption("repos")
+    on.exit(options(repos = repos), add = TRUE)
+    repos[repos == "@CRAN@"] <- "https://cran.rstudio.com"
+    options(repos = repos)
+
+    # check for renv on CRAN matching this version
+    db <- as.data.frame(available.packages(), stringsAsFactors = FALSE)
+    if ("renv" %in% rownames(db)) {
+      entry <- db["renv", ]
+      if (identical(entry$Version, version)) {
+        message("* Installing renv ", version, " ... ", appendLF = FALSE)
+        dir.create(libpath, showWarnings = FALSE, recursive = TRUE)
+        utils::install.packages("renv", lib = libpath, quiet = TRUE)
+        message("Done!")
+        return(TRUE)
+      }
+    }
+
     # try to download renv
     message("* Downloading renv ", version, " ... ", appendLF = FALSE)
     prefix <- "https://api.github.com"
@@ -89,14 +114,16 @@ local({
 
     # attempt to install it into bootstrap library
     message("* Installing renv ", version, " ... ", appendLF = FALSE)
-    dir.create(path, showWarnings = FALSE, recursive = TRUE)
-    utils::install.packages(destfile, repos = NULL, type = "source", lib = path, quiet = TRUE)
+    dir.create(libpath, showWarnings = FALSE, recursive = TRUE)
+    utils::install.packages(destfile, repos = NULL, type = "source", lib = libpath, quiet = TRUE)
     message("Done!")
 
-  })
+  }
+
+  try(install_renv())
 
   # try again to load
-  if (requireNamespace("renv", lib.loc = path, quietly = TRUE)) {
+  if (requireNamespace("renv", lib.loc = libpath, quietly = TRUE)) {
     message("Successfully installed and loaded renv ", version, ".")
     return(renv::load())
   }

@@ -13,7 +13,15 @@
 #' @export
 #' @examples
 #' # will generate figures in a temporary directory
-#' enlarge_plot(plot(1:100), large_plot = plot(1:100))
+#' if (requireNamespace("ggplot2")) {
+#' dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))
+#' enlarge_plot(dist,
+#' large_plot = dist + ggplot2::theme_classic(base_size = 18))
+#' } else {
+#' graphics::hist(stats::rbeta(200, 3, 4))
+#' dist <- grDevices::recordPlot()
+#' enlarge_plot(dist)
+#' }
 enlarge_plot <- function(plot,
                          large_plot = plot,
                          plot_name = NULL,
@@ -26,6 +34,13 @@ enlarge_plot <- function(plot,
     plot_name <- digest::digest(stats::runif(1))
   }
 
-  partial(require_file("_enlarge_plot.Rmd"), name = plot_name,
-          ...)
+
+  partial(require_file("_enlarge_plot.Rmd"), name = plot_name, ...,
+          !!!list(
+            plot = plot,
+            large_plot = large_plot,
+            width_small = width_small,
+            height_small = height_small,
+            width_large = width_large,
+            height_large = height_large))
 }

@@ -42,9 +42,24 @@ partial <- function(input = NULL, ...,
                     show_code = FALSE,
                     use_strings = TRUE) {
 
+  dots <-  rlang::dots_list(...,
+                            .ignore_empty = "none",
+                            .preserve_empty = FALSE,
+                            .homonyms = "error",
+                            .check_assign = TRUE)
+  if (any(names(dots) == "")) {
+    stop("All arguments passed via dots must be named.")
+  }
+
+  if (length(dots) > 0) {
+    # if dots argument were passed, they constitute the environment
+    envir <- rlang::as_environment(dots, parent = envir)
+  } else {
+    envir <- envir # if I don't do this, rmarkdown somehow doesn't use the right
+    # environment for some reason (knitr does)
+  }
+
   # allow duplicate chunk labels in knitr, useful for knit_child
-  envir <- envir # if I don't do this, rmarkdown somehow doesn't use the right
-  # environment for some reason (knitr does)
   dupes <- getOption("knitr.duplicate.label")
   options(knitr.duplicate.label = 'allow')
   on.exit(options(knitr.duplicate.label = dupes))
