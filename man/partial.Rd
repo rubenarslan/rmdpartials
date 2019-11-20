@@ -32,14 +32,16 @@ partial(input = NULL, ..., text = NULL, output = NULL,
 \description{
 This slightly modifies the \code{\link[knitr:knit_child]{knitr::knit_child()}} function to have different defaults.
 \itemize{
-\item the environment defaults to the calling environment.
+\item the environment defaults to the calling environment, or if passed, to arguments passed via ...
 \item the output receives the class \code{knit_asis}, so that the output will be rendered "as is" by knitr when calling inside a chunk (no need to set \code{results='asis'} as a chunk option).
 \item defaults to \code{quiet = TRUE}
+\item the package additionally renders \code{knit_asis} objects in the viewer when printed to make previewing partials easier
+\item the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials
 }
 }
 \details{
 Why default to the calling environment? Typically this function defaults to the global environment. This makes sense if you want to use knit children in the same context as the rest of the document.
-However, you may also want to use knit children inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).
+However, you may also want to use knit children to respect conventional scoping rules inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).
 
 Some caveats:
 \itemize{

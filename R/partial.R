@@ -1,12 +1,14 @@
 #' Knit a child document and output as is (render markup)
 #'
 #' This slightly modifies the [knitr::knit_child()] function to have different defaults.
-#' - the environment defaults to the calling environment.
+#' - the environment defaults to the calling environment, or if passed, to arguments passed via ...
 #' - the output receives the class `knit_asis`, so that the output will be rendered "as is" by knitr when calling inside a chunk (no need to set `results='asis'` as a chunk option).
 #' - defaults to `quiet = TRUE`
+#' - the package additionally renders `knit_asis` objects in the viewer when printed to make previewing partials easier
+#' - the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials
 #'
 #' Why default to the calling environment? Typically this function defaults to the global environment. This makes sense if you want to use knit children in the same context as the rest of the document.
-#' However, you may also want to use knit children inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).
+#' However, you may also want to use knit children to respect conventional scoping rules inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).
 #'
 #' Some caveats:
 #' - the function has to return to the top-level. There's no way to [cat()] this from loops or an if-condition without without setting `results='asis'`. You can however concatenate these objects with [paste.knit_asis()]
@@ -103,10 +105,10 @@ partial <- function(input = NULL, ...,
   ## if there is a viewer available, we are probably in RStudio and not knitting
   not_interactive <- !is_interactive()
 
-  # if an output file is specified
-  if (!is.null(output)) {
-    knitr::opts_knit$set(output.dir = dirname(output))
-  }
+  # # if an output file is specified
+  # if (!is.null(output)) {
+  #   knitr::opts_knit$set(output.dir = dirname(output))
+  # }
 
   ## if we are not in the working directory, we have presumably already started
   ## knitting in a temporary directory
@@ -122,14 +124,14 @@ partial <- function(input = NULL, ...,
       knit_options$output.dir <- getwd()
     }
   } else {
-    if (!is.null(output)) {
-      www_dir <- dirname(output)
-      file_name <- tools::file_path_sans_ext(basename(output))
-    } else {
+    # if (!is.null(output)) {
+    #   www_dir <- dirname(output)
+    #   file_name <- tools::file_path_sans_ext(basename(output))
+    # } else {
       www_dir <- tempfile("preview_partial")
       dir.create(www_dir)
       file_name <- "index"
-    }
+    # }
 
     input_file_rmd <- file.path(www_dir, paste0(file_name, ".Rmd"))
     output_file_md <- file.path(www_dir, paste0(file_name, ".knit.md"))
@@ -179,15 +181,30 @@ partial <- function(input = NULL, ...,
 
     if (requireNamespace("rmarkdown", quietly = TRUE)) {
       # knitr::opts_chunk$set(screenshot.force = FALSE)
-      path <- utils::capture.output(path <- suppressMessages(
+      messages <- utils::capture.output(
+        path <- suppressMessages(
         rmarkdown::render(input_file_rmd, output_file = output_file_html,
                           envir = envir, encoding = encode,
                           clean = FALSE,
                           rmarkdown::html_document(self_contained = FALSE))
-      ))
+        )
+      )
     } else {
       warning("The partial was not shown in the viewer, because rmarkdown is ",
               "not installed.")
+    }
+
+    if (!is.null(output)) {
+      stopifnot(!file.exists(output))
+      files <- file.path(knit_meta$output.dir, "index_files")
+      if (dir.exists(files)) {
+        new_files <- file.path(dirname(output), basename(files))
+        stopifnot(!dir.exists(new_files))
+        dir.create(new_files)
+        file.copy(files, new_files,
+                copy.date = TRUE, recursive = TRUE)
+      }
+      file.copy(path, output, copy.date = TRUE)
     }
 
     res <- paste0(readLines(output_file_md), collapse = "\n")

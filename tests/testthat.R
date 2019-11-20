@@ -1,3 +1,4 @@
+library(devtools)
 library(testthat)
 library(rmdpartials)
 

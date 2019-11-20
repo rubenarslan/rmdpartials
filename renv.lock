@@ -7,7 +7,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://cran.rstudio.com/"
+        "URL": "https://cran.rstudio.com"
       }
     ]
   },
@@ -483,6 +483,12 @@
       "Version": "2.1.0",
       "Source": "CRAN",
       "Hash": "13a9510a8b8fcb47b1cc063be40f2818"
+    },
+    "renv": {
+      "Package": "renv",
+      "Version": "0.8.3",
+      "Source": "Repository",
+      "Repository": "CRAN"
     },
     "reshape2": {
       "Package": "reshape2",

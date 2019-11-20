@@ -2,7 +2,11 @@
 local({
 
   # the requested version of renv
-  version <- "0.8.2"
+  version <- "0.8.3"
+
+  # avoid recursion
+  if (!is.na(Sys.getenv("RENV_R_INITIALIZING", unset = NA)))
+    return(invisible(TRUE))
 
   # signal that we're loading renv during R startup
   Sys.setenv("RENV_R_INITIALIZING" = "true")
@@ -48,7 +52,7 @@ local({
 
   })
 
-  # try to load renv from one of these paths
+  # try to load renv from the project library
   if (requireNamespace("renv", lib.loc = libpath, quietly = TRUE))
     return(renv::load())
 
@@ -87,7 +91,7 @@ local({
     # fix up repos
     repos <- getOption("repos")
     on.exit(options(repos = repos), add = TRUE)
-    repos[repos == "@CRAN@"] <- "https://cran.rstudio.com"
+    repos[repos == "@CRAN@"] <- "https://cloud.r-project.org"
     options(repos = repos)
 
     # check for renv on CRAN matching this version
@@ -112,11 +116,25 @@ local({
     utils::download.file(url, destfile = destfile, mode = "wb", quiet = TRUE)
     message("Done!")
 
-    # attempt to install it into bootstrap library
+    # attempt to install it into project library
     message("* Installing renv ", version, " ... ", appendLF = FALSE)
     dir.create(libpath, showWarnings = FALSE, recursive = TRUE)
-    utils::install.packages(destfile, repos = NULL, type = "source", lib = libpath, quiet = TRUE)
+
+    # invoke using system2 so we can capture and report output
+    bin <- R.home("bin")
+    exe <- if (Sys.info()[["sysname"]] == "Windows") "R.exe" else "R"
+    r <- file.path(bin, exe)
+    args <- c("--vanilla", "CMD", "INSTALL", "-l", shQuote(libpath), shQuote(destfile))
+    output <- system2(r, args, stdout = TRUE, stderr = TRUE)
     message("Done!")
+
+    # check for successful install
+    status <- attr(output, "status")
+    if (is.numeric(status) && !identical(status, 0L)) {
+      text <- c("Error installing renv", "=====================", output)
+      writeLines(text, con = stderr())
+    }
+
 
   }
 
