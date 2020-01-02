@@ -7,13 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Partial rmarkdown documents to prettify your reports • rmdpartials</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Partial rmarkdown documents to prettify your reports">
 <meta property="og:description" content="
-		This package relies on 'rmarkdown' partials, also know as child documents in
+		Use rmarkdown partials, also know as child documents in
 		knitr, so you can make components for HTML, PDF, and Word documents. 
-		It provides various helper functions to make certain functions easier. 
+		The package provides various helper functions to make certain functions easier. 
 		You may want to use this package, if you want to flexibly summarise objects 
 		using a combination of figures, tables, text, and HTML widgets. 
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
@@ -25,7 +26,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -37,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -45,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -59,7 +60,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/rubenarslan/rmdpartials">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -72,13 +73,9 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
 <div id="rmdpartials" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rmdpartials" class="anchor"></a>rmdpartials</h1></div>
@@ -100,48 +97,48 @@
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <p>To get the latest development version:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"rubenarslan/rmdpartials"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"rubenarslan/rmdpartials"</span>)</a></code></pre></div>
 </div>
 <div id="define-a-partial" class="section level2">
 <h2 class="hasAnchor">
 <a href="#define-a-partial" class="anchor"></a>Define a partial</h2>
 <p>Define a function like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">my_summary &lt;-<span class="st"> </span><span class="cf">function</span>(object) {</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  rmdpartials<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmdpartials/topics/partial">partial</a></span>(<span class="st">"_my_summary.Rmd"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  rmdpartials<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmdpartials/man/partial.html">partial</a></span>(<span class="st">"_my_summary.Rmd"</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">}</a></code></pre></div>
 <p>And create a file called <code>_my_summary.Rmd</code> with contents like this:</p>
-<pre><code>## My special summary
-
-```{r}
-summary(object)
-```
-
-## My special plot
-```{r}
-plot(object)
-```</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">## My special summary</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">```</span><span class="dt">{r}</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="dt">summary(object)</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">```</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">## My special plot</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">```</span><span class="dt">{r}</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="dt">plot(object)</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">```</span></a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>To use the partial in an rmarkdown report</p>
-<pre><code>```{r}
-m1 &lt;- lm(y ~ x, data = data)
-my_summary(m1)
-```</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="st">```</span><span class="dt">{r}</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="dt">m1 &lt;- lm(y ~ x, data = data)</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="dt">my_summary(m1)</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">```</span></a></code></pre></div>
 <div id="usage-as-a-knit_print-method" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage-as-a-knit_print-method" class="anchor"></a>Usage as a knit_print method</h3>
 <p>To make your partial the default printing option for objects of a certain class when they are echoed in a knitr document, give it the name of a knit_print method.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">knit_print.lm &lt;-<span class="st"> </span><span class="cf">function</span>(object) {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  rmdpartials<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rmdpartials/topics/partial">partial</a></span>(<span class="st">"_my_summary.Rmd"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  rmdpartials<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmdpartials/man/partial.html">partial</a></span>(<span class="st">"_my_summary.Rmd"</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">}</a></code></pre></div>
 <p>Now, all you need to is let the lm object be echoed.</p>
-<pre><code>```{r}
-m1 &lt;- lm(y ~ x, data = data)
-m1
-```</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="st">```</span><span class="dt">{r}</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="dt">m1 &lt;- lm(y ~ x, data = data)</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="dt">m1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">```</span></a></code></pre></div>
 <p>You can also preview what the result from the partial would look like by calling it in an interactive session.</p>
 </div>
 </div>
@@ -179,8 +176,7 @@ m1
 </ul>
 </div>
 
-
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/rubenarslan/rmdpartials"><img src="https://travis-ci.org/rubenarslan/rmdpartials.svg?branch=master" alt="Travis-CI Build Status"></a></li>
@@ -188,7 +184,6 @@ m1
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -197,12 +192,14 @@ m1
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
