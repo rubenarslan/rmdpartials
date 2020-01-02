@@ -3,10 +3,33 @@
 language: R
 sudo: false
 cache: packages
-warnings_are_errors: true
+warnings_are_errors: false
 
 r_packages:
   - covr
 
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: required
+
+      r_binary_packages:
+        - knitr
+        - htmltools
+        - rlang
+        - testthat
+        - roxygen2
+        - rmarkdown
+        - pkgdown
+        - covr
+        - spelling
+        - dplyr
+        - DT
+        - ggplot2
+
 after_success:
   - Rscript -e 'library(covr); codecov()'
+
+repos:
+  CRAN: https://cloud.r-project.org
