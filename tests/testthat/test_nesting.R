@@ -53,17 +53,9 @@ partial('three.Rmd')
 })
 
 
-knitr::opts_chunk$set(error = FALSE)
-
-test_that("Clean unloading", {
-  opts <- options()
-  optc <- knitr::opts_chunk$get()
-  optk <- knitr::opts_knit$get()
-
+test_that("Nesting with plots", {
   wd <- getwd()
-  files <- list.files(wd)
-
-  test_dir <- tempfile("unloading_rmdpartials")
+  test_dir <- tempfile("testing_rmdpartials")
   dir.create(test_dir)
   setwd(test_dir)
   on.exit({
@@ -72,63 +64,64 @@ test_that("Clean unloading", {
   })
   cat(
     "
-No.0
+0
 ```{r}
+plot(0)
 partial('one.Rmd')
 ```
 ", file = "zero.Rmd")
 
   cat(
     "
-No.1
+1
 ```{r}
-plot(1:10)
+plot(1)
+partial('two.Rmd')
 ```
 ", file = "one.Rmd")
 
+  cat(
+    "
+2
+```{r}
+plot(2)
+partial('three.Rmd')
+```
+", file = "two.Rmd")
+
+  cat(
+    "
+3
+```{r}
+plot(3)
+```
+", file = "three.Rmd")
+
   text <- paste0(readLines("zero.Rmd"), collapse = "\n")
 
-  set.seed(1)
   expect_silent(md <- knitr::knit(text = text, quiet = TRUE))
 
-  expect_match(md, "No.0")
-  expect_match(md, "No.1")
-  expect_match(md, "figure/")
-  expect_equal(3, length(list.files(test_dir)))
+  expect_match(md, "0")
+  expect_match(md, "1")
+  expect_match(md, "2")
+  expect_match(md, "3")
+  output.dir <- getwd()
+  expect_equal(4, length(list.files(
+    file.path(output.dir, "figure"))))
 
-  expect_identical(opts, options())
-  expect_identical(optc, knitr::opts_chunk$get())
-  optk_new <- knitr::opts_knit$get()
-  # this is set by knitr itself even without partials
-  optk_new$output.dir <- NULL
-  optk$output.dir <- NULL
-  expect_identical(optk, optk_new)
-  expect_identical(files, list.files(wd))
-})
+  expect_message(md <- rmarkdown::render("zero.Rmd"))
+  list.files(dirname(md))
 
-test_that("Partial to file", {
-  test_dir <- tempfile("partial_file")
-  dir.create(test_dir)
-  setwd(test_dir)
-  cat(
-"
-1
+  expect_silent(md <- partial("zero.Rmd"))
+  output.dir <- attributes(partial_result)$knit_meta$output.dir
 
-```{r}
-plot(1:100)
-```
-", file = "oneplot.Rmd")
-  template <- file.path(getwd(), "oneplot.Rmd")
+  expect_match(md, "0")
+  expect_match(md, "1")
+  expect_match(md, "2")
+  expect_match(md, "3")
+  output.dir <- getwd()
+  expect_equal(4, length(list.files(
+    file.path(output.dir, "figure"))))
 
-  output_dir <- tempfile("partial_output")
-  dir.create(output_dir)
-  setwd(output_dir)
-
-  files <- partial(template, output = "myplot.html")
-  output.dir <- attributes(files)$knit_meta$output.dir
-  list.files(output.dir)
-  files <- c("index_files", "myplot.html")
-  list.files(output_dir)
-  expect_equal(files, list.files(output_dir))
-
+  unlink(test_dir, recursive = TRUE)
 })
