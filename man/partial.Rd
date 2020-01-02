@@ -4,9 +4,18 @@
 \alias{partial}
 \title{Knit a child document and output as is (render markup)}
 \usage{
-partial(input = NULL, ..., text = NULL, output = NULL,
-  quiet = TRUE, options = NULL, envir = parent.frame(),
-  name = NULL, show_code = FALSE, use_strings = TRUE)
+partial(
+  input = NULL,
+  ...,
+  text = NULL,
+  output = NULL,
+  quiet = TRUE,
+  options = NULL,
+  envir = parent.frame(),
+  name = NULL,
+  show_code = FALSE,
+  use_strings = TRUE
+)
 }
 \arguments{
 \item{input}{if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)}

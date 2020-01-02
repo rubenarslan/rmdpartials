@@ -16,6 +16,6 @@ Print \code{knit_asis} as rendered HTML in the viewer
 }
 \examples{
 text <- paste(c("### Headline",
-"Text"), collapse = "\\n")
+"Text"), collapse = "\n")
 knitr::asis_output(text)
 }

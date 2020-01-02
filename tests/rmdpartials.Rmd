@@ -20,9 +20,15 @@ set.seed(1)
 ## Graphical relationship
 ```{r}
 library(rmdpartials)
+set.seed(1)
 x <- rnorm(100)
 y <- x + rnorm(100) + 0.5 * x^2
-enlarge_plot(plot(x, y), large_plot = plot(x, y), plot_name = "myplot")
+graphics::plot(x, y)
+dist <- grDevices::recordPlot() # this actually works much better with ggplot2
+```
+
+```{r}
+enlarge_plot(dist, large_plot = dist, plot_name = "myplot")
 ```
 
 ## Regression
@@ -35,7 +41,7 @@ regression_diagnostics(reg)
 ```{r}
 x <- 5
 y <- 9
-partial(text = "`r x` `r y`", input = NULL)
+partial(text = "`r x` `r y`")
 ```
 
 

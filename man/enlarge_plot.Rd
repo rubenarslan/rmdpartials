@@ -4,9 +4,16 @@
 \alias{enlarge_plot}
 \title{Generate a small plot that will be enlarged in a modal when clicked}
 \usage{
-enlarge_plot(plot, large_plot = plot, plot_name = NULL,
-  width_small = 2, height_small = 2, width_large = 7,
-  height_large = 7, ...)
+enlarge_plot(
+  plot,
+  large_plot = plot,
+  plot_name = NULL,
+  width_small = 2,
+  height_small = 2,
+  width_large = 7,
+  height_large = 7,
+  ...
+)
 }
 \arguments{
 \item{plot}{a plot}
