@@ -144,6 +144,7 @@ partial <- function(input = NULL, ...,
     options$cache.path <- paste0(www_dir, "/",
                             knitr::opts_chunk$get("cache.path"), safe_name, "_")
   }
+  knit_options$unnamed.chunk.label <- "rmdpartialchunk"
 
   # handle chunk options
   options$label <- options$child <- NULL
@@ -227,4 +228,23 @@ is_interactive <- function()
     return(FALSE)
   }
   interactive()
+}
+
+#' Convert text or file to a partial
+#'
+#' This adds the `knit_asis` class to a markdown chunk, so that it can be rendered
+#' in the viewer and simply echoed in other knitr chunks. Won't preserve figures
+#' unless the path happens to be the same or you explicitly pass it to the knit_meta argument.
+#'
+#'
+#' @param input if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)
+#' @param text passed to [knitr::knit_child()]
+#' @param knit_meta you can pass a path to figures and other resources here
+as.partial <- function(input = NULL, text = NULL, knit_meta = list()) {
+  if (is.null(text)) {
+    text <- paste0(readLines(input), collapse = "\n")
+  }
+
+  knitr::asis_output(paste(c("", text), collapse = "\n"),
+                   meta = knit_meta)
 }
