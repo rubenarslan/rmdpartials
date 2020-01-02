@@ -66,6 +66,7 @@ paste.knit_asis <- function(..., sep = "\n\n\n", collapse = "\n\n\n") {
 
 
 require_file <- function(file, package = 'rmdpartials') {
+  file <- gsub("^inst/", "", file)
   system.file(file, package = package, mustWork = TRUE)
 }
 

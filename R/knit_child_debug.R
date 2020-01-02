@@ -7,6 +7,6 @@
 #' @examples
 #' knit_child_debug()
 knit_child_debug <- function(...) {
-  partial(require_file("_debug.Rmd"), ...)
+  partial(require_file("inst/_debug.Rmd"), ...)
 }
 
