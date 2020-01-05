@@ -14,7 +14,7 @@ print.knit_asis <- function(x, ...) {
     if (is.null(attributes(x)$knit_meta)
         || is.null(attributes(x)$knit_meta$output.dir)) {
       www_dir <- tempfile("preview_partial")
-      dir.create(www_dir)
+      stopifnot(dir.create(www_dir))
     } else {
       www_dir <- attributes(x)$knit_meta$output.dir
     }
@@ -40,7 +40,7 @@ print.knit_asis <- function(x, ...) {
     }
 
   } else {
-    message("No viewer found, probably checking")
+    message("No viewer found, probably documenting or testing")
     cat(x)
   }
   invisible(x)

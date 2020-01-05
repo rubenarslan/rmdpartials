@@ -44,6 +44,8 @@ partial <- function(input = NULL, ...,
                     show_code = FALSE,
                     use_strings = TRUE) {
 
+  stopifnot( xor(is.null(text), is.null(input)))
+
   dots <-  rlang::dots_list(...,
                             .ignore_empty = "none",
                             .preserve_empty = FALSE,
@@ -57,20 +59,22 @@ partial <- function(input = NULL, ...,
     # if dots argument were passed, they constitute the environment
     envir <- rlang::as_environment(dots, parent = envir)
   } else {
-    envir <- envir # if I don't do this, rmarkdown somehow doesn't use the right
+    envir <- envir # if I don't do this, rmarkdown doesn't use the right
     # environment for some reason (knitr does)
   }
 
   # allow duplicate chunk labels in knitr, useful for knit_child
   dupes <- getOption("knitr.duplicate.label")
   options(knitr.duplicate.label = 'allow')
-  on.exit(options(knitr.duplicate.label = dupes))
+  on.exit(options(knitr.duplicate.label = dupes), add = TRUE)
 
   knit_options <- list()
 
-  stopifnot( xor(is.null(text), is.null(input)))
-
   if (!is.null(input) && use_strings) {
+    if (!isAbsolutePath(input) &&
+        !is.null(knitr::opts_knit$get("rmdpartials_original_wd"))) {
+      input <- file.path(knitr::opts_knit$get("rmdpartials_original_wd"), input)
+    }
     text <- paste0(readLines(input), collapse = "\n")
     input <- NULL
   }
@@ -116,35 +120,41 @@ partial <- function(input = NULL, ...,
     !identical(knitr::opts_knit$get("output.dir"), getwd())
 
 
-  child_mode <- is.null(output) && (child || not_interactive || in_tmp_dir)
+  child_mode <- is.null(output) && (child || not_interactive)
 
   if (child_mode) {
     knit_options$child <- TRUE
-    if (is.null(knitr::opts_knit$get("output.dir"))) {
-      knit_options$output.dir <- getwd()
-    }
+    # if (is.null(knitr::opts_knit$get("output.dir"))) {
+    #   knit_options$output.dir <- getwd()
+    # }
   } else {
     # if (!is.null(output)) {
     #   www_dir <- dirname(output)
     #   file_name <- tools::file_path_sans_ext(basename(output))
     # } else {
-      www_dir <- tempfile("preview_partial")
-      dir.create(www_dir)
+      www_dir <- tempfile("rmdpartial")
+      oldwd <- getwd()
+      knitr::opts_knit$set(rmdpartials_original_wd = oldwd)
+      on.exit(setwd(oldwd), add = TRUE)
+      on.exit(knitr::opts_knit$set(rmdpartials_original_wd = NULL), add = TRUE)
+      stopifnot(dir.create(www_dir))
+      setwd(www_dir)
+      www_dir <- getwd() # fix messy paths through tempfile
+      # knit_options$output.dir <- www_dir
       file_name <- "index"
     # }
 
-    input_file_rmd <- file.path(www_dir, paste0(file_name, ".Rmd"))
-    output_file_md <- file.path(www_dir, paste0(file_name, ".knit.md"))
-    output_file_html <- file.path(www_dir, paste0(file_name, ".html"))
+    input_file_rmd <- file.path(paste0(file_name, ".Rmd"))
+    output_file_md <- file.path(paste0(file_name, ".knit.md"))
+    output_file_html <- file.path(paste0(file_name, ".html"))
 
-    knit_options$base.dir <- www_dir
-    knit_options$output.dir <- www_dir
-    options$fig.path <- paste0(www_dir, "/",
-                              knitr::opts_chunk$get("fig.path"), safe_name, "_")
-    options$cache.path <- paste0(www_dir, "/",
-                            knitr::opts_chunk$get("cache.path"), safe_name, "_")
+    options$fig.path <- paste0(knitr::opts_chunk$get("fig.path"),
+                               safe_name, "_")
+    options$cache.path <- paste0(knitr::opts_chunk$get("cache.path"),
+                                 safe_name, "_")
   }
-  knit_options$unnamed.chunk.label <- "rmdpartialchunk"
+  # reduce odds of duplicate chunk names
+  knit_options$unnamed.chunk.label <- "rmdpartial"
 
   # handle chunk options
   options$label <- options$child <- NULL
@@ -177,7 +187,7 @@ partial <- function(input = NULL, ...,
   } else {
     cat(text, file = input_file_rmd)
     knit_meta <- list()
-    knit_meta$output.dir <- knit_options$output.dir
+    knit_meta$output.dir <- www_dir
     knit_meta$output.file <- output_file_html
 
     if (requireNamespace("rmarkdown", quietly = TRUE)) {
@@ -196,6 +206,9 @@ partial <- function(input = NULL, ...,
     }
 
     if (!is.null(output)) {
+      if (!isAbsolutePath(output) && exists("oldwd")) {
+        output <- file.path(oldwd, output)
+      }
       stopifnot(!file.exists(output))
       files <- file.path(knit_meta$output.dir, "index_files")
       if (dir.exists(files)) {
@@ -224,6 +237,9 @@ is_interactive <- function()
   if (identical(getOption("rstudio.notebook.executing"), TRUE)) {
     return(FALSE)
   }
+  if (identical(Sys.getenv("TESTTHAT_interactive"), "true")) {
+    return(TRUE)
+  }
   if (identical(Sys.getenv("TESTTHAT"), "true")) {
     return(FALSE)
   }
@@ -247,4 +263,15 @@ as.partial <- function(input = NULL, text = NULL, knit_meta = list()) {
 
   knitr::asis_output(paste(c("", text), collapse = "\n"),
                    meta = knit_meta)
+}
+
+isAbsolutePath <- function(pathname) {
+  if (regexpr("^~", pathname) != -1L)
+    return(TRUE)
+  if (regexpr("^.:(/|\\\\)", pathname) != -1L)
+    return(TRUE)
+  components <- strsplit(pathname, split = "[/\\]")[[1L]]
+  if (length(components) == 0L)
+    return(FALSE)
+  (components[1L] == "")
 }
