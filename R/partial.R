@@ -24,6 +24,8 @@
 #' @param name a name to use for cacheing and figure paths. Randomly generated if left unspecified.
 #' @param show_code whether to print the R code for the partial or just the results (sets the chunk option echo = FALSE while the chunk is being rendered)
 #' @param use_strings whether to read in the child file as a character string (solves working directory problems but harder to debug)
+#' @param render_preview true if interactive mode is auto-detected, false when actually knitting the partial as a child
+#' @param preview_output_format defaults to [rmarkdown::html_document()] with self_contained set to true
 #'
 #' @export
 #' @examples
@@ -42,9 +44,21 @@ partial <- function(input = NULL, ...,
                     quiet = TRUE, options = NULL,
                     envir = parent.frame(), name = NULL,
                     show_code = FALSE,
-                    use_strings = TRUE) {
+                    use_strings = TRUE,
+                    render_preview = needs_preview(),
+                    preview_output_format = NULL) {
 
   stopifnot( xor(is.null(text), is.null(input)))
+
+  if (!is.null(output)) {
+    if (missing(render_preview) && !render_preview) {
+      # override render_preview default if output is specified
+      render_preview <- TRUE
+    } else if (!missing(render_preview) && !render_preview) {
+      # but if render_preview was explicitly set, inform user
+      stop("You cannot save an output file without enabling `render_preview`.")
+    }
+  }
 
   dots <-  rlang::dots_list(...,
                             .ignore_empty = "none",
@@ -91,6 +105,7 @@ partial <- function(input = NULL, ...,
     name <- substr(digest::digest(stats::runif(1)), 1, 10)
   }
   safe_name <- safe_name(name)
+
   if (is.null(options$fig.path)) {
     options$fig.path <- paste0(
       knitr::opts_chunk$get("fig.path"), safe_name, "_")
@@ -100,49 +115,27 @@ partial <- function(input = NULL, ...,
       knitr::opts_chunk$get("cache.path"), safe_name, "_")
   }
 
-
-  # unfortunately opts_knit child is not always set if the child is not called
-  # via a chunk option
-  child <- knitr::opts_knit$get("child")
-
-  # so we build our own
-  ## if there is a viewer available, we are probably in RStudio and not knitting
-  not_interactive <- !is_interactive()
-
-  # # if an output file is specified
-  # if (!is.null(output)) {
-  #   knitr::opts_knit$set(output.dir = dirname(output))
-  # }
-
-  ## if we are not in the working directory, we have presumably already started
-  ## knitting in a temporary directory
-  in_tmp_dir <- !is.null(knitr::opts_knit$get("output.dir")) &&
-    !identical(knitr::opts_knit$get("output.dir"), getwd())
-
-
-  child_mode <- is.null(output) && (child || not_interactive)
-
-  if (child_mode) {
+  if (!render_preview) {
     knit_options$child <- TRUE
-    # if (is.null(knitr::opts_knit$get("output.dir"))) {
-    #   knit_options$output.dir <- getwd()
-    # }
+    if (is.null(knitr::opts_knit$get("output.dir"))) {
+      knit_options$output.dir <- getwd()
+    }
+  } else if (!requireNamespace("rmarkdown", quietly = TRUE)) {
+    warning("No preview generated for the partial, because rmarkdown is ",
+            "not installed.")
+    knit_options$child <- TRUE
+    render_preview <- FALSE
   } else {
-    # if (!is.null(output)) {
-    #   www_dir <- dirname(output)
-    #   file_name <- tools::file_path_sans_ext(basename(output))
-    # } else {
-      www_dir <- tempfile("rmdpartial")
-      oldwd <- getwd()
-      knitr::opts_knit$set(rmdpartials_original_wd = oldwd)
-      on.exit(setwd(oldwd), add = TRUE)
-      on.exit(knitr::opts_knit$set(rmdpartials_original_wd = NULL), add = TRUE)
-      stopifnot(dir.create(www_dir))
-      setwd(www_dir)
-      www_dir <- getwd() # fix messy paths through tempfile
-      # knit_options$output.dir <- www_dir
-      file_name <- "index"
-    # }
+    # prepare rendering a preview in a temporary location
+    www_dir <- tempfile("rmdpartial")
+    oldwd <- getwd()
+    knitr::opts_knit$set(rmdpartials_original_wd = oldwd)
+    on.exit(setwd(oldwd), add = TRUE)
+    on.exit(knitr::opts_knit$set(rmdpartials_original_wd = NULL), add = TRUE)
+    stopifnot(dir.create(www_dir))
+    setwd(www_dir)
+    www_dir <- getwd() # fix messy paths through tempfile
+    file_name <- "index"
 
     input_file_rmd <- file.path(paste0(file_name, ".Rmd"))
     output_file_md <- file.path(paste0(file_name, ".knit.md"))
@@ -153,10 +146,11 @@ partial <- function(input = NULL, ...,
     options$cache.path <- paste0(knitr::opts_chunk$get("cache.path"),
                                  safe_name, "_")
   }
+
   # reduce odds of duplicate chunk names
   knit_options$unnamed.chunk.label <- "rmdpartial"
 
-  # handle chunk options
+  # handle chunk options and resetting them
   options$label <- options$child <- NULL
   options$echo <- show_code
   optc <- knitr::opts_chunk$get(names(options), drop = FALSE)
@@ -166,7 +160,7 @@ partial <- function(input = NULL, ...,
                   knitr::opts_chunk$get(i))) knitr::opts_chunk$set(optc[i])
   }, add = TRUE)
 
-  # handle knit options
+  # handle knit options and resetting them
   optk <- knitr::opts_knit$get(names(knit_options), drop = FALSE)
   knitr::opts_knit$set(knit_options)
   on.exit({
@@ -174,38 +168,47 @@ partial <- function(input = NULL, ...,
                     knitr::opts_knit$get(i))) knitr::opts_knit$set(optk[i])
   }, add = TRUE)
 
+  # taken from knit_child
   encode <- knitr::opts_knit$get("encoding")
   if (is.null(encode)) {
     encode <- getOption("encoding")
   }
 
-  knit_meta <- NULL
-  if (child_mode) {
+  knit_meta <- list()
+  if (!render_preview) {
+    knit_meta$output.dir <- knit_options$output.dir
     res <- knitr::knit(input = input, output = NULL, text = text,
                        quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
                        envir = envir, encoding = encode)
   } else {
+    text <- paste0("---
+pagetitle: Partial review
+---
+
+", text)
     cat(text, file = input_file_rmd)
-    knit_meta <- list()
     knit_meta$output.dir <- www_dir
     knit_meta$output.file <- output_file_html
+    if (is.null(preview_output_format)) {
+      preview_output_format <- rmarkdown::html_document(self_contained = TRUE)
+    }
 
-    if (requireNamespace("rmarkdown", quietly = TRUE)) {
       # knitr::opts_chunk$set(screenshot.force = FALSE)
       messages <- utils::capture.output(
         path <- suppressMessages(
-        rmarkdown::render(input_file_rmd, output_file = output_file_html,
+        rmarkdown::render(input_file_rmd,
+                          output_format = preview_output_format,
+                          output_file = output_file_html,
                           envir = envir, encoding = encode,
-                          clean = FALSE,
-                          rmarkdown::html_document(self_contained = FALSE))
+                          clean = FALSE
+                          )
         )
       )
-    } else {
-      warning("The partial was not shown in the viewer, because rmarkdown is ",
-              "not installed.")
-    }
+    knit_meta$rmarkdown_output <- messages
+    res <- paste0(readLines(output_file_md), collapse = "\n")
 
     if (!is.null(output)) {
+      # if the resulting file was supposed to be saved
       if (!isAbsolutePath(output) && exists("oldwd")) {
         output <- file.path(oldwd, output)
       }
@@ -220,8 +223,6 @@ partial <- function(input = NULL, ...,
       }
       file.copy(path, output, copy.date = TRUE)
     }
-
-    res <- paste0(readLines(output_file_md), collapse = "\n")
   }
 
 
@@ -245,6 +246,20 @@ is_interactive <- function()
   }
   interactive()
 }
+
+
+needs_preview <- function() {
+  # unfortunately opts_knit child is not always set if the child is not called
+  # via a chunk option
+  child <- knitr::opts_knit$get("child")
+
+  # so we build our own
+  ## if there is a viewer available, we are probably in RStudio and not knitting
+  interactive <- is_interactive()
+
+  (!child && interactive)
+}
+
 
 #' Convert text or file to a partial
 #'
