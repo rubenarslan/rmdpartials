@@ -90,6 +90,7 @@ Now, all you need to is let the lm object be echoed.
     ```
 
 You can also preview what the result from the partial would look like by
-calling it in an interactive session.
+calling it in an interactive
+session.
 
-## [Code of conduct for contributing](CONDUCT.md)
+## [Code of conduct for contributing](https://rubenarslan.github.io/rmdpartials/CONDUCT.html)

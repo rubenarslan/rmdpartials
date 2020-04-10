@@ -1,8 +1,8 @@
 Package: rmdpartials
-Title: Partial rmarkdown documents to prettify your reports
+Title: Partial 'rmarkdown' Documents to Prettify your Reports
 Description: 
 		Use 'rmarkdown' partials, also know as child documents in
-		knitr, so you can make components for HTML, PDF, and Word documents. 
+		'knitr', so you can make components for HTML, PDF, and Word documents. 
 		The package provides various helper functions to make certain functions easier. 
 		You may want to use this package, if you want to flexibly summarise objects 
 		using a combination of figures, tables, text, and HTML widgets. 
