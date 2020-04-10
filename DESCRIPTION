@@ -23,11 +23,11 @@ Imports:
 	stats,
 	digest,
 	utils,
-	graphics,
-	grDevices,
 	knitr,
   rlang
 Suggests:
+  	grDevices,
+  	graphics,
     testthat,
     roxygen2,
     rmarkdown,

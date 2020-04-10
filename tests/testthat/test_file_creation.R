@@ -72,9 +72,9 @@ plot(1:100)
 
   files <- c("index_files", "index.html", "index.knit.md", "index.Rmd",
              "index.utf8.md")
-  expect_equal("oneplot.Rmd", list.files(test_dir))
-  expect_equal(files, list.files(output.dir))
-  expect_equal(1, length(list.files(
+  expect_setequal("oneplot.Rmd", list.files(test_dir))
+  expect_setequal(files, list.files(output.dir))
+  expect_setequal(1, length(list.files(
     file.path(output.dir, "index_files", "figure-html"))))
 
 })

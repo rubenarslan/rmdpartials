@@ -70,9 +70,11 @@ partial <- function(input = NULL, ...,
   }
 
   if (length(dots) > 0) {
+    arguments_given <- TRUE
     # if dots argument were passed, they constitute the environment
     envir <- rlang::as_environment(dots, parent = envir)
   } else {
+    arguments_given <- FALSE
     envir <- envir # if I don't do this, rmarkdown doesn't use the right
     # environment for some reason (knitr does)
   }
@@ -99,10 +101,11 @@ partial <- function(input = NULL, ...,
   stopifnot(is.list(options))
 
   if (is.null(name)) {
-    # xxx <- function(...) {
-    #   digest::digest(list(...))
-    # }
-    name <- substr(digest::digest(stats::runif(1)), 1, 10)
+    if(arguments_given) {
+      name <- substr(digest::digest(envir), 1, 10)
+    } else {
+      name <- substr(digest::digest(runif(1)), 1, 10)
+    }
   }
   safe_name <- safe_name(name)
 
