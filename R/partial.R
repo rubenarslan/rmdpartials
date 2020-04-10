@@ -104,7 +104,7 @@ partial <- function(input = NULL, ...,
     if(arguments_given) {
       name <- substr(digest::digest(envir), 1, 10)
     } else {
-      name <- substr(digest::digest(runif(1)), 1, 10)
+      name <- substr(digest::digest(stats::runif(1)), 1, 10)
     }
   }
   safe_name <- safe_name(name)
