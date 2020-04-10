@@ -182,7 +182,7 @@ partial <- function(input = NULL, ...,
                        envir = envir, encoding = encode)
   } else {
     text <- paste0("---
-pagetitle: Partial review
+pagetitle: Partial preview
 ---
 
 ", text)

@@ -72,51 +72,7 @@ require_file <- function(file, package = 'rmdpartials') {
   system.file(file, package = package, mustWork = TRUE)
 }
 
-recursive_escape <- function(x, depth = 0, max_depth = 4,
-                             escape_fun = htmltools::htmlEscape) {
-  if (depth < max_depth) {
-    # escape names for all vectors
-    if (!is.null(names(x))) {
-      names(x) <- escape_fun(names(x))
-    }
-    if (!is.null(rownames(x))) {
-      rownames(x) <- escape_fun(rownames(x))
-    }
-
-    # escape any character vectors
-    if (is.character(x)) {
-      x <- escape_fun(x)
-    } else if (is.list(x) && class(x) == "list") {
-      # turtle down into lists
-      x <- lapply(x, function(x) { recursive_escape(x, depth + 1) })
-    }
-  }
-  x
-}
-
 safe_name <- function(x) {
   gsub("[^[:alnum:]]", "_", x)
 }
-#
-#
-# function ()
-# {
-#   opt <- peek_option("rlang_interactive")
-#   if (!is_null(opt)) {
-#     if (!is_bool(opt)) {
-#       options(rlang_interactive = NULL)
-#       abort("`rlang_interactive` must be a single `TRUE` of `FALSE`")
-#     }
-#     return(opt)
-#   }
-#   if (is_true(peek_option("knitr.in.progress"))) {
-#     return(FALSE)
-#   }
-#   if (is_true(peek_option("rstudio.notebook.executing"))) {
-#     return(FALSE)
-#   }
-#   if (identical(Sys.getenv("TESTTHAT"), "true")) {
-#     return(FALSE)
-#   }
-#   interactive()
-# }
+

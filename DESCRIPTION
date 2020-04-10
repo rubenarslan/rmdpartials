@@ -26,7 +26,6 @@ Imports:
 	graphics,
 	grDevices,
 	knitr,
-  htmltools,
   rlang
 Suggests:
     testthat,
