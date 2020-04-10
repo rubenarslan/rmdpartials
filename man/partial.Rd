@@ -14,7 +14,9 @@ partial(
   envir = parent.frame(),
   name = NULL,
   show_code = FALSE,
-  use_strings = TRUE
+  use_strings = TRUE,
+  render_preview = needs_preview(),
+  preview_output_format = NULL
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ partial(
 \item{show_code}{whether to print the R code for the partial or just the results (sets the chunk option echo = FALSE while the chunk is being rendered)}
 
 \item{use_strings}{whether to read in the child file as a character string (solves working directory problems but harder to debug)}
+
+\item{render_preview}{true if interactive mode is auto-detected, false when actually knitting the partial as a child}
+
+\item{preview_output_format}{defaults to \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}} with self_contained set to true}
 }
 \description{
 This slightly modifies the \code{\link[knitr:knit_child]{knitr::knit_child()}} function to have different defaults.

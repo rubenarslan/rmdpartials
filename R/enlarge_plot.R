@@ -12,6 +12,7 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' # will generate figures in a temporary directory
 #' if (requireNamespace("ggplot2")) {
 #' dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))
@@ -21,6 +22,7 @@
 #' graphics::hist(stats::rbeta(200, 3, 4))
 #' dist <- grDevices::recordPlot()
 #' enlarge_plot(dist)
+#' }
 #' }
 enlarge_plot <- function(plot,
                          large_plot = plot,

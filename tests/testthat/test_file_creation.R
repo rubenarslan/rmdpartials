@@ -20,7 +20,11 @@ plot(1:100)
   dir.create(output_dir)
   setwd(output_dir)
 
-  expect_silent(files <- partial(template, output = "myplot.html"))
+  expect_silent(files <- partial(template, output = "myplot.html",
+                                 preview_output_format =
+                                   rmarkdown::html_document(
+                                     self_contained = FALSE))
+                )
   output.dir <- attributes(files)$knit_meta$output.dir
   list.files(output.dir)
   # if making a partial from top level, switch to a new temp
@@ -54,7 +58,12 @@ plot(1:100)
 ", file = "oneplot.Rmd")
   template <- file.path(getwd(), "oneplot.Rmd")
 
-  expect_silent(partial_result <- partial(template))
+  expect_silent(partial_result <- partial(template,
+                                          render_preview = TRUE,
+                                          preview_output_format =
+                                            rmarkdown::html_document(
+                                              self_contained = FALSE))
+  )
   output.dir <- attributes(partial_result)$knit_meta$output.dir
   # list.files(output.dir)
   # list.files(test_dir)

@@ -43,7 +43,6 @@ print(knitr::opts_knit$get())
 
 </details>
 
-
 <details>
 
 <summary>opts_chunk</summary>
@@ -53,5 +52,22 @@ print(knitr::opts_chunk$get())
 
 </details>
 
+<details>
+
+<summary>Sys.getenv()</summary>
+```{r}
+print(Sys.getenv())
+```
+
 </details>
 
+<details>
+
+<summary>options()</summary>
+```{r}
+print(options())
+```
+
+</details>
+
+</details>

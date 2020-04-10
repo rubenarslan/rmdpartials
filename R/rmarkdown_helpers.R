@@ -23,6 +23,7 @@ print.knit_asis <- function(x, ...) {
       path <- output_file_html
       viewer(path)
     } else {
+      # todo: do I need to move/copy the file?
       input_file_md <- file.path(www_dir, "index.md")
       cat(x, file = input_file_md)
 
@@ -58,6 +59,7 @@ print.knit_asis <- function(x, ...) {
 #'
 #' @export
 #' @examples
+#'
 #' paste.knit_asis("# Headline 1", "## Headline 2")
 paste.knit_asis <- function(..., sep = "\n\n\n", collapse = "\n\n\n") {
   knitr::asis_output(paste(..., sep = sep, collapse = collapse))

@@ -13,5 +13,7 @@ knit_child_debug(...)
 Get some debugging information on various potential problems when making partials
 }
 \examples{
+\dontrun{
 knit_child_debug()
+}
 }

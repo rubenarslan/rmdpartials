@@ -84,6 +84,15 @@ test_that("Nesting with plots partial", {
   expect_equal(2, length(list.files(
     file.path(output.dir, "index_files/figure-html"))))
 
+  cur_viewer = getOption("viewer")
+  on.exit({
+    options(viewer = cur_viewer)
+  }, add = TRUE)
+  options(viewer = function(x) { cat(x) })
+  expect_output(knitted <- print(md), regexp = "\\.html$")
+  expect_equal(class(knitted), "knit_asis")
+  expect_match(knitted, "<img")
+
   unlink(test_dir, recursive = TRUE)
   unlink(output.dir, recursive = TRUE)
 })

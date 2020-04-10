@@ -15,8 +15,10 @@ regression_diagnostics(regression, ...)
 Show the estimated coefficients in a regression and diagnostics
 }
 \examples{
+\dontrun{
 # will generate figures in a temporary directory
 data("ChickWeight")
 regression <- lm(weight ~ Time, data = ChickWeight)
 regression_diagnostics(regression)
+}
 }

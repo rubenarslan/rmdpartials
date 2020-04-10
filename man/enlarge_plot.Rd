@@ -36,6 +36,7 @@ enlarge_plot(
 Generate a small plot that will be enlarged in a modal when clicked
 }
 \examples{
+\dontrun{
 # will generate figures in a temporary directory
 if (requireNamespace("ggplot2")) {
 dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))
@@ -45,5 +46,6 @@ large_plot = dist + ggplot2::theme_classic(base_size = 18))
 graphics::hist(stats::rbeta(200, 3, 4))
 dist <- grDevices::recordPlot()
 enlarge_plot(dist)
+}
 }
 }

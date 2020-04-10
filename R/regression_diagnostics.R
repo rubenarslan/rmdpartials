@@ -6,10 +6,12 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' # will generate figures in a temporary directory
 #' data("ChickWeight")
 #' regression <- lm(weight ~ Time, data = ChickWeight)
 #' regression_diagnostics(regression)
+#' }
 regression_diagnostics <- function(regression, ...) {
   partial(require_file("inst/_regression_diagnostics.Rmd"), ...)
 }

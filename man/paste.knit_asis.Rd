@@ -20,5 +20,6 @@ Helper function for \code{knit_asis} objects, useful when e.g. \code{\link[=part
 Works like \code{\link[base:paste]{base::paste()}} with both the sep and the collapse argument set to two empty lines
 }
 \examples{
+
 paste.knit_asis("# Headline 1", "## Headline 2")
 }
