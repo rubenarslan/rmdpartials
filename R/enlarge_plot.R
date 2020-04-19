@@ -10,9 +10,11 @@
 #' @param height_large height for the large plot
 #' @param ... passed to [partial()]
 #'
+#' @return Returns markdown/HTML text with class "knit_asis"
+#'
 #' @export
 #' @examples
-#' \dontrun{
+#' if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
 #' # will generate figures in a temporary directory
 #' if (requireNamespace("ggplot2")) {
 #' dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))

@@ -44,14 +44,17 @@ partial(
 
 \item{preview_output_format}{defaults to \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}} with self_contained set to true}
 }
+\value{
+Returns rendered markdown with the class "knit_asis". When used interactively, the knit_meta attributes will additionally contain the path of a rendered preview in a temporary directory.
+}
 \description{
-This slightly modifies the \code{\link[knitr:knit_child]{knitr::knit_child()}} function to have different defaults.
+This modifies and extends the \code{\link[knitr:knit_child]{knitr::knit_child()}} function. Defaults change as follows:
 \itemize{
 \item the environment defaults to the calling environment, or if passed, to arguments passed via ...
 \item the output receives the class \code{knit_asis}, so that the output will be rendered "as is" by knitr when calling inside a chunk (no need to set \code{results='asis'} as a chunk option).
 \item defaults to \code{quiet = TRUE}
-\item the package additionally renders \code{knit_asis} objects in the viewer when printed to make previewing partials easier
-\item the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials
+\item the package additionally renders \code{knit_asis} objects in the viewer when printed to make previewing partials easier. This is achieved using \code{\link[rmarkdown:render]{rmarkdown::render()}} and done in a temporary directory (only when used interactively/not in child mode).
+\item the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials (by trying to resolve path ambiguities, using text instead of files for sources, and some functionality to prevent iteratively overwriting generated figures and other files)
 }
 }
 \details{
@@ -61,6 +64,7 @@ However, you may also want to use knit children to respect conventional scoping 
 Some caveats:
 \itemize{
 \item the function has to return to the top-level. There's no way to \code{\link[=cat]{cat()}} this from loops or an if-condition without without setting \code{results='asis'}. You can however concatenate these objects with \code{\link[=paste.knit_asis]{paste.knit_asis()}}
+\item currently not yet producing expected results in RStudio notebooks in interactive use
 }
 }
 \examples{

@@ -49,6 +49,9 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -136,25 +139,6 @@ Close
 </table>
 <p>Values vs. fitted values.</p>
 <p><img src="rmdpartials_files/figure-html/726ffe1a09_rmdpartial-10-1.png" width="700"></p>
-<!-- Button trigger modal -->
-<p><a href="#f080a7cff67d0703e82af142e5e9fdd2" data-toggle="modal" data-target="#f080a7cff67d0703e82af142e5e9fdd2"></a></p>
-<pre><code>## NULL</code></pre>
-<p></p>
-<!-- Modal -->
-<div id="f080a7cff67d0703e82af142e5e9fdd2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="f080a7cff67d0703e82af142e5e9fdd2Label" aria-hidden="true">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-body">
-<pre><code>## NULL</code></pre>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">
-Close
-</button>
-</div>
-</div>
-</div>
-</div>
 <details><p><summary>Diagnostics (click to show)</summary></p>
 <p><img src="rmdpartials_files/figure-html/726ffe1a09_rmdpartial-11-1.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_rmdpartial-11-2.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_rmdpartial-11-3.png" width="700"><img src="rmdpartials_files/figure-html/726ffe1a09_rmdpartial-11-4.png" width="700"></p>
 </details>
@@ -162,7 +146,7 @@ Close
 <div id="write-a-partial-on-the-fly" class="section level2">
 <h2 class="hasAnchor">
 <a href="#write-a-partial-on-the-fly" class="anchor"></a>Write a partial on the fly</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fl">5</span>
 <span class="no">y</span> <span class="kw">&lt;-</span> <span class="fl">9</span>
 <span class="fu"><a href="../reference/partial.html">partial</a></span>(<span class="kw">text</span> <span class="kw">=</span> <span class="st">"`r x` `r y`"</span>)</pre></body></html></div>
 <p>5 9</p>
@@ -171,9 +155,9 @@ Close
 <h2 class="hasAnchor">
 <a href="#debug" class="anchor"></a>Debug</h2>
 <p>Learn about environments in partials.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/knit_child_debug.html">knit_child_debug</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/knit_child_debug.html">knit_child_debug</a></span>()</pre></body></html></div>
 <pre><code>## Warning in readLines(input): incomplete final line found on '/private/var/
-## folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T/Rtmptw17u5/temp_libpath2e7321e23003/
+## folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T/Rtmp9er7z0/temp_libpatha85851d7ce39/
 ## rmdpartials/_debug.Rmd'</code></pre>
 <details><p><summary>Debug</summary></p>
 <p>Working directory</p>
@@ -213,7 +197,7 @@ Close
 ## $upload.fun
 ## function (x) 
 ## x
-## &lt;bytecode: 0x7f9e3bdfbae0&gt;
+## &lt;bytecode: 0x7feee8cfacd8&gt;
 ## &lt;environment: namespace:base&gt;
 ## 
 ## $global.device
@@ -269,17 +253,17 @@ Close
 ## [1] "html"
 ## 
 ## $rmarkdown.pandoc.args
-##  [1] "--email-obfuscation"                                                              
-##  [2] "none"                                                                             
-##  [3] "--standalone"                                                                     
-##  [4] "--section-divs"                                                                   
-##  [5] "--table-of-contents"                                                              
-##  [6] "--toc-depth"                                                                      
-##  [7] "2"                                                                                
-##  [8] "--template"                                                                       
-##  [9] "/var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//Rtmp0WUmkz/file2f829049482.html"
-## [10] "--highlight-style"                                                                
-## [11] "pygments"                                                                         
+##  [1] "--email-obfuscation"                                                               
+##  [2] "none"                                                                              
+##  [3] "--standalone"                                                                      
+##  [4] "--section-divs"                                                                    
+##  [5] "--table-of-contents"                                                               
+##  [6] "--toc-depth"                                                                       
+##  [7] "2"                                                                                 
+##  [8] "--template"                                                                        
+##  [9] "/var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//Rtmpvl789D/filea9254b4e9af1.html"
+## [10] "--highlight-style"                                                                 
+## [11] "pygments"                                                                          
 ## 
 ## $rmarkdown.pandoc.id_prefix
 ## [1] ""
@@ -336,7 +320,7 @@ Close
 ## [1] FALSE
 ## 
 ## $cache.path
-## [1] "rmdpartials_cache/html/4636e56958_"
+## [1] "rmdpartials_cache/html/942083989f_"
 ## 
 ## $cache.vars
 ## NULL
@@ -363,7 +347,7 @@ Close
 ## [1] "default"
 ## 
 ## $fig.path
-## [1] "/Users/rubenarslan/research/rmdpartials/docs/articles/rmdpartials_files/figure-html/4636e56958_"
+## [1] "/Users/rubenarslan/research/rmdpartials/docs/articles/rmdpartials_files/figure-html/942083989f_"
 ## 
 ## $dev
 ## [1] "png"
@@ -457,45 +441,23 @@ Close
 </details><details><p><summary>Sys.getenv()</summary></p>
 <pre><code>## __CF_USER_TEXT_ENCODING
 ##                         0x1F7:0x0:0x2
-## __KMP_REGISTERED_LIB_10321
-##                         0x106b2b8e8-cafe4e23-libomp.dylib
-## __KMP_REGISTERED_LIB_11891
-##                         0x101aa58e8-cafe8ef8-libomp.dylib
-## __KMP_REGISTERED_LIB_12162
-##                         0x1042938e8-cafe8e76-libomp.dylib
-## __KMP_REGISTERED_LIB_12195
-##                         0x1102f78e8-cafed1ab-libomp.dylib
-## __KMP_REGISTERED_LIB_4452
-##                         0x10d0b28e8-cafe63c8-libomp.dylib
-## __KMP_REGISTERED_LIB_4702
-##                         0x10a7bb8e8-cafe5509-libomp.dylib
-## __KMP_REGISTERED_LIB_4830
-##                         0x1088218e8-cafe1d7f-libomp.dylib
-## __KMP_REGISTERED_LIB_5374
-##                         0x10554c8e8-cafe928e-libomp.dylib
-## __KMP_REGISTERED_LIB_5694
-##                         0x10f1058e8-cafe2c30-libomp.dylib
-## __KMP_REGISTERED_LIB_6322
-##                         0x1050c68e8-cafe5e68-libomp.dylib
-## __KMP_REGISTERED_LIB_6600
-##                         0x1079e08e8-cafebf2c-libomp.dylib
-## __KMP_REGISTERED_LIB_8237
-##                         0x10d9108e8-cafe824a-libomp.dylib
-## __KMP_REGISTERED_LIB_8594
-##                         0x1044928e8-cafe861a-libomp.dylib
-## __KMP_REGISTERED_LIB_8793
-##                         0x10d5b78e8-cafedfa0-libomp.dylib
-## __KMP_REGISTERED_LIB_9534
-##                         0x10c54e8e8-cafead97-libomp.dylib
+## __KMP_REGISTERED_LIB_41632
+##                         0x1041fb8e8-cafec7ce-libomp.dylib
+## __KMP_REGISTERED_LIB_43096
+##                         0x10ca848e8-cafe1ab1-libomp.dylib
+## __KMP_REGISTERED_LIB_43301
+##                         0x107aac8e8-cafe8d43-libomp.dylib
+## __KMP_REGISTERED_LIB_43355
+##                         0x106bec8e8-cafeacb5-libomp.dylib
 ## _R_CHECK_LENGTH_1_LOGIC2_
 ##                         TRUE
 ## Apple_PubSub_Socket_Render
-##                         /private/tmp/com.apple.launchd.eCUs6x5H0z/Render
+##                         /private/tmp/com.apple.launchd.xNvXLRg8st/Render
 ## BIBINPUTS               ::/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex
 ## BSTINPUTS               :/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/bibtex/bst
 ## CLICOLOR_FORCE          1
 ## CYGWIN                  nodosfilewarning
-## DISPLAY                 /private/tmp/com.apple.launchd.kbtdjOrwJY/org.macosforge.xquartz:0
+## DISPLAY                 /private/tmp/com.apple.launchd.PnIouNsQmo/org.macosforge.xquartz:0
 ## DYLD_FALLBACK_LIBRARY_PATH
 ##                         /Library/Frameworks/R.framework/Resources/lib:/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/server
 ## EDITOR                  vi
@@ -510,9 +472,9 @@ Close
 ## MPLENGINE               tkAgg
 ## PAGER                   /usr/bin/less
 ## PATH                    /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/TeX/texbin:/usr/local/MacGPG2/bin:/opt/puppetlabs/bin:/usr/local/munki:/opt/X11/bin:/usr/local/git/bin
-## PROCESSX_PS4VFAQRK015_1586527484
+## PROCESSX_PS4VFAQRK015_1587313954
 ##                         YES
-## PROCESSX_PS9SM1VW4UJ7_1586527475
+## PROCESSX_PSKPKPAFYX2J_1587313944
 ##                         YES
 ## PWD                     /Users/rubenarslan/research/rmdpartials
 ## R_ARCH                  
@@ -537,7 +499,7 @@ Close
 ## R_PRINTCMD              lpr
 ## R_QPDF                  /Library/Frameworks/R.framework/Resources/bin/qpdf
 ## R_RD4PDF                times,inconsolata,hyper
-## R_SESSION_TMPDIR        /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//Rtmp1isLcG
+## R_SESSION_TMPDIR        /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//Rtmp9xx6RF
 ## R_SHARE_DIR             /Library/Frameworks/R.framework/Resources/share
 ## R_SYSTEM_ABI            osx,gcc,gxx,gfortran,?
 ## R_TESTS                 
@@ -546,25 +508,24 @@ Close
 ## R_ZIPCMD                /usr/bin/zip
 ## RMARKDOWN_MATHJAX_PATH
 ##                         /Applications/RStudio.app/Contents/Resources/resources/mathjax-26
-## RS_PPM_FD_READ          13
-## RS_PPM_FD_WRITE         16
+## RS_PPM_FD_READ          4
+## RS_PPM_FD_WRITE         30
 ## RS_RPOSTBACK_PATH       /Applications/RStudio.app/Contents/MacOS/rpostback
-## RS_SHARED_SECRET        684150316886914974695974191
+## RS_SHARED_SECRET        159612311118228919001342455198
 ## RSTUDIO                 1
 ## RSTUDIO_CONSOLE_COLOR   256
 ## RSTUDIO_CONSOLE_WIDTH   142
 ## RSTUDIO_PANDOC          /Applications/RStudio.app/Contents/MacOS/pandoc
-## RSTUDIO_SESSION_PORT    44129
+## RSTUDIO_SESSION_PORT    13971
 ## RSTUDIO_USER_IDENTITY   rubenarslan
 ## RSTUDIO_WINUTILS        bin/winutils
 ## SED                     /usr/bin/sed
 ## SHELL                   /bin/bash
 ## SHLVL                   0
 ## SSH_ASKPASS             rpostback-askpass
-## SSH_AUTH_SOCK           /private/tmp/com.apple.launchd.tumPjT4C2a/Listeners
+## SSH_AUTH_SOCK           /private/tmp/com.apple.launchd.waieW1S4mW/Listeners
 ## TAR                     /usr/bin/tar
 ## TERM                    xterm-256color
-## TESTTHAT_interactive    true
 ## TEXINPUTS               :/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex
 ## TMPDIR                  /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T/
 ## USER                    rubenarslan
@@ -594,7 +555,7 @@ Close
 ##         cli_server_default(msg)
 ##     }
 ## }
-## &lt;bytecode: 0x7f9e3e82eed8&gt;
+## &lt;bytecode: 0x7feeea9491d8&gt;
 ## &lt;environment: namespace:cli&gt;
 ## 
 ## $CBoundsCheck
@@ -627,7 +588,7 @@ Close
 ## {
 ##     grDevices::pdf(NULL, width, height, ...)
 ## }
-## &lt;bytecode: 0x7f9e3c2673f0&gt;
+## &lt;bytecode: 0x7feee91c7a08&gt;
 ## &lt;environment: namespace:knitr&gt;
 ## 
 ## $device.ask.default

@@ -32,11 +32,14 @@ enlarge_plot(
 
 \item{...}{passed to \code{\link[=partial]{partial()}}}
 }
+\value{
+Returns markdown/HTML text with class "knit_asis"
+}
 \description{
 Generate a small plot that will be enlarged in a modal when clicked
 }
 \examples{
-\dontrun{
+if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
 # will generate figures in a temporary directory
 if (requireNamespace("ggplot2")) {
 dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))

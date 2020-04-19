@@ -1,4 +1,19 @@
-## Submission
+## Resubmission
+* I added \value documentation for all functions.
+* I added an example for `as.partial`
+* The initial submission already called `on.exit` after any change to options or WD, now I always call `on.exit` immediately before changing something, as recommended. 
+  I understand I should avoid changing the working directory and options for the user.
+  I looked for ways to avoid changing options/WD for a long time and could not find any, because of how 'rmarkdown' 
+  is implemented (it generates files in the working directory and it's not perfectly predictable that they will not 
+  overwrite anything, and it cannot be made to render all files in a temporary directory without loss of function). 
+  The same holds true for the options that I set. 
+  In addition, I had already written extensive tests (tests/testthat/test_unloading.R) to ensure
+  that all function calls unload cleanly (i.e., reset all options and working directory to their previous state, don't
+  leave behind files in the working directory). I hope it's okay with CRAN with this additional explanation. Should
+  there be a way to avoid setting the options and working directories as I do, I'd be glad to learn, but I found none.
+* The dontrun sections were replaced by checking for pkgdown (which cannot render the output well)s. I tried to use the simplest possible examples now. Also, there are tests for the aspects of functions that are excluded via dontrun.
+
+## Old submission notes
 * First release
 * This is pretty much a re-implementation of knit_child with 
   - more reasonable defaults (work more often)

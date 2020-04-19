@@ -40,12 +40,12 @@
 
 
 <meta property="og:title" content="Knit a child document and output as is (render markup) — partial" />
-<meta property="og:description" content="This slightly modifies the knitr::knit_child() function to have different defaults.
+<meta property="og:description" content="This modifies and extends the knitr::knit_child() function. Defaults change as follows:
 the environment defaults to the calling environment, or if passed, to arguments passed via ...
 the output receives the class knit_asis, so that the output will be rendered &quot;as is&quot; by knitr when calling inside a chunk (no need to set results='asis' as a chunk option).
 defaults to quiet = TRUE
-the package additionally renders knit_asis objects in the viewer when printed to make previewing partials easier
-the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials
+the package additionally renders knit_asis objects in the viewer when printed to make previewing partials easier. This is achieved using rmarkdown::render() and done in a temporary directory (only when used interactively/not in child mode).
+the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials (by trying to resolve path ambiguities, using text instead of files for sources, and some functionality to prevent iteratively overwriting generated figures and other files)
 
 " />
 
@@ -97,6 +97,9 @@ the package takes care of some troubles behind the scenes that you might find yo
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -124,12 +127,12 @@ the package takes care of some troubles behind the scenes that you might find yo
     </div>
 
     <div class="ref-description">
-    <p>This slightly modifies the <code><a href='https://rdrr.io/pkg/knitr/man/knit_child.html'>knitr::knit_child()</a></code> function to have different defaults.</p><ul>
+    <p>This modifies and extends the <code><a href='https://rdrr.io/pkg/knitr/man/knit_child.html'>knitr::knit_child()</a></code> function. Defaults change as follows:</p><ul>
 <li><p>the environment defaults to the calling environment, or if passed, to arguments passed via ...</p></li>
 <li><p>the output receives the class <code>knit_asis</code>, so that the output will be rendered "as is" by knitr when calling inside a chunk (no need to set <code>results='asis'</code> as a chunk option).</p></li>
 <li><p>defaults to <code>quiet = TRUE</code></p></li>
-<li><p>the package additionally renders <code>knit_asis</code> objects in the viewer when printed to make previewing partials easier</p></li>
-<li><p>the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials</p></li>
+<li><p>the package additionally renders <code>knit_asis</code> objects in the viewer when printed to make previewing partials easier. This is achieved using <code><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>rmarkdown::render()</a></code> and done in a temporary directory (only when used interactively/not in child mode).</p></li>
+<li><p>the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials (by trying to resolve path ambiguities, using text instead of files for sources, and some functionality to prevent iteratively overwriting generated figures and other files)</p></li>
 </ul>
 
     </div>
@@ -202,22 +205,22 @@ the package takes care of some troubles behind the scenes that you might find yo
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns rendered markdown with the class "knit_asis". When used interactively, the knit_meta attributes will additionally contain the path of a rendered preview in a temporary directory.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Why default to the calling environment? Typically this function defaults to the global environment. This makes sense if you want to use knit children in the same context as the rest of the document.
 However, you may also want to use knit children to respect conventional scoping rules inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).</p>
 <p>Some caveats:</p><ul>
 <li><p>the function has to return to the top-level. There's no way to <code><a href='https://rdrr.io/r/base/cat.html'>cat()</a></code> this from loops or an if-condition without without setting <code>results='asis'</code>. You can however concatenate these objects with <code><a href='paste.knit_asis.html'>paste.knit_asis()</a></code></p></li>
+<li><p>currently not yet producing expected results in RStudio notebooks in interactive use</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># super simple partial example</span>
 <span class='fu'>partial</span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Test"</span>)</div><div class='output co'>#&gt; <span class='message'>No viewer found, probably documenting or testing</span></div><div class='output co'>#&gt; 
-#&gt; ---
-#&gt; pagetitle: Partial review
-#&gt; ---
-#&gt; 
 #&gt; Test</div><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># an example of a wrapper function that calls partial with an argument</span>

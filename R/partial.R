@@ -1,17 +1,18 @@
 #' Knit a child document and output as is (render markup)
 #'
-#' This slightly modifies the [knitr::knit_child()] function to have different defaults.
+#' This modifies and extends the [knitr::knit_child()] function. Defaults change as follows:
 #' - the environment defaults to the calling environment, or if passed, to arguments passed via ...
 #' - the output receives the class `knit_asis`, so that the output will be rendered "as is" by knitr when calling inside a chunk (no need to set `results='asis'` as a chunk option).
 #' - defaults to `quiet = TRUE`
-#' - the package additionally renders `knit_asis` objects in the viewer when printed to make previewing partials easier
-#' - the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials
+#' - the package additionally renders `knit_asis` objects in the viewer when printed to make previewing partials easier. This is achieved using [rmarkdown::render()] and done in a temporary directory (only when used interactively/not in child mode).
+#' - the package takes care of some troubles behind the scenes that you might find yourself in if you nest partials (by trying to resolve path ambiguities, using text instead of files for sources, and some functionality to prevent iteratively overwriting generated figures and other files)
 #'
 #' Why default to the calling environment? Typically this function defaults to the global environment. This makes sense if you want to use knit children in the same context as the rest of the document.
 #' However, you may also want to use knit children to respect conventional scoping rules inside functions to e.g. summarise a regression using a set of commands (e.g. plot some diagnostic graphs and a summary for a regression nicely formatted).
 #'
 #' Some caveats:
 #' - the function has to return to the top-level. There's no way to [cat()] this from loops or an if-condition without without setting `results='asis'`. You can however concatenate these objects with [paste.knit_asis()]
+#' - currently not yet producing expected results in RStudio notebooks in interactive use
 #'
 #'
 #' @param input if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)
@@ -27,6 +28,8 @@
 #' @param render_preview true if interactive mode is auto-detected, false when actually knitting the partial as a child
 #' @param preview_output_format defaults to [rmarkdown::html_document()] with self_contained set to true
 #'
+#'
+#' @return Returns rendered markdown with the class "knit_asis". When used interactively, the knit_meta attributes will additionally contain the path of a rendered preview in a temporary directory.
 #' @export
 #' @examples
 #' # super simple partial example
@@ -81,8 +84,8 @@ partial <- function(input = NULL, ...,
 
   # allow duplicate chunk labels in knitr, useful for knit_child
   dupes <- getOption("knitr.duplicate.label")
-  options(knitr.duplicate.label = 'allow')
   on.exit(options(knitr.duplicate.label = dupes), add = TRUE)
+  options(knitr.duplicate.label = 'allow')
 
   knit_options <- list()
 
@@ -130,12 +133,12 @@ partial <- function(input = NULL, ...,
     render_preview <- FALSE
   } else {
     # prepare rendering a preview in a temporary location
-    www_dir <- tempfile("rmdpartial")
     oldwd <- getwd()
+    www_dir <- tempfile("rmdpartial")
+    stopifnot(dir.create(www_dir))
+    on.exit(knitr::opts_knit$set(rmdpartials_original_wd = NULL), add = TRUE)
     knitr::opts_knit$set(rmdpartials_original_wd = oldwd)
     on.exit(setwd(oldwd), add = TRUE)
-    on.exit(knitr::opts_knit$set(rmdpartials_original_wd = NULL), add = TRUE)
-    stopifnot(dir.create(www_dir))
     setwd(www_dir)
     www_dir <- getwd() # fix messy paths through tempfile
     file_name <- "index"
@@ -157,19 +160,19 @@ partial <- function(input = NULL, ...,
   options$label <- options$child <- NULL
   options$echo <- show_code
   optc <- knitr::opts_chunk$get(names(options), drop = FALSE)
-  knitr::opts_chunk$set(options)
   on.exit({
     for (i in names(options)) if (identical(options[[i]],
                   knitr::opts_chunk$get(i))) knitr::opts_chunk$set(optc[i])
   }, add = TRUE)
+  knitr::opts_chunk$set(options)
 
   # handle knit options and resetting them
   optk <- knitr::opts_knit$get(names(knit_options), drop = FALSE)
-  knitr::opts_knit$set(knit_options)
   on.exit({
       for (i in names(knit_options)) if (identical(knit_options[[i]],
                     knitr::opts_knit$get(i))) knitr::opts_knit$set(optk[i])
   }, add = TRUE)
+  knitr::opts_knit$set(knit_options)
 
   # taken from knit_child
   encode <- knitr::opts_knit$get("encoding")
@@ -270,15 +273,16 @@ needs_preview <- function() {
 #' in the viewer and simply echoed in other knitr chunks. Won't preserve figures
 #' unless the path happens to be the same or you explicitly pass it to the knit_meta argument.
 #'
+#' @return Returns its input as text with class "knit_asis"
 #'
-#' @param input if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)
-#' @param text passed to [knitr::knit_child()]
+#' @param text will be returned with the class "knit_asis"
 #' @param knit_meta you can pass a path to figures and other resources here
-as.partial <- function(input = NULL, text = NULL, knit_meta = list()) {
-  if (is.null(text)) {
-    text <- paste0(readLines(input), collapse = "\n")
-  }
-
+#'
+#' @export
+#' @examples
+#' my_partial <- as.partial("## Headline
+#' Text")
+as.partial <- function(text = NULL, knit_meta = list()) {
   knitr::asis_output(paste(c("", text), collapse = "\n"),
                    meta = knit_meta)
 }

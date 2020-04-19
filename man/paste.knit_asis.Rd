@@ -13,6 +13,9 @@ paste.knit_asis(..., sep = "\\n\\n\\n", collapse = "\\n\\n\\n")
 
 \item{collapse}{defaults to two empty lines, passed to \code{\link[base:paste]{base::paste()}}}
 }
+\value{
+Returns text with the class "knit_asis"
+}
 \description{
 Helper function for \code{knit_asis} objects, useful when e.g. \code{\link[=partial]{partial()}} was used in a loop.
 }

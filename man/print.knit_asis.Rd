@@ -11,11 +11,14 @@
 
 \item{...}{ignored}
 }
+\value{
+Invisibly returns its input, either prints its input or sends it to a viewer, if one is defined
+}
 \description{
 Print \code{knit_asis} as rendered HTML in the viewer
 }
 \examples{
 text <- paste(c("### Headline",
 "Text"), collapse = "\n")
-knitr::asis_output(text)
+print(knitr::asis_output(text))
 }

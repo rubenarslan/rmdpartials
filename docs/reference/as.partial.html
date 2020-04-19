@@ -92,6 +92,9 @@ unless the path happens to be the same or you explicitly pass it to the knit_met
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -124,18 +127,14 @@ in the viewer and simply echoed in other knitr chunks. Won't preserve figures
 unless the path happens to be the same or you explicitly pass it to the knit_meta argument.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.partial</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>knit_meta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
+    <pre class="usage"><span class='fu'>as.partial</span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>knit_meta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
-      <td><p>if you specify a file path here, it will be read in before being passed to knitr (to avoid a working directory mess)</p></td>
-    </tr>
-    <tr>
       <th>text</th>
-      <td><p>passed to <code><a href='https://rdrr.io/pkg/knitr/man/knit_child.html'>knitr::knit_child()</a></code></p></td>
+      <td><p>will be returned with the class "knit_asis"</p></td>
     </tr>
     <tr>
       <th>knit_meta</th>
@@ -143,7 +142,13 @@ unless the path happens to be the same or you explicitly pass it to the knit_met
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns its input as text with class "knit_asis"</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>my_partial</span> <span class='kw'>&lt;-</span> <span class='fu'>as.partial</span>(<span class='st'>"## Headline
+Text"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

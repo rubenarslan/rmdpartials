@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print <code>knit_asis</code> as rendered HTML in the viewer — print.knit_asis • rmdpartials</title>
+<title>Changelog • rmdpartials</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Print <code>knit_asis</code> as rendered HTML in the viewer — print.knit_asis" />
-<meta property="og:description" content="Print knit_asis as rendered HTML in the viewer" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -114,46 +113,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print <code>knit_asis</code> as rendered HTML in the viewer</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rubenarslan/rmdpartials/blob/master/R/rmarkdown_helpers.R'><code>R/rmarkdown_helpers.R</code></a></small>
-    <div class="hidden name"><code>print.knit_asis.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/rubenarslan/rmdpartials/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Print <code>knit_asis</code> as rendered HTML in the viewer</p>
-    </div>
-
-    <pre class="usage"><span class='co'># S3 method for knit_asis</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>the knit_asis object</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Invisibly returns its input, either prints its input or sends it to a viewer, if one is defined</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>text</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"### Headline"</span>,
-<span class='st'>"Text"</span>), <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>"\n"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/asis_output.html'>asis_output</a></span>(<span class='no'>text</span>))</div><div class='output co'>#&gt; <span class='message'>No viewer found, probably documenting or testing</span></div><div class='output co'>#&gt; ### Headline
-#&gt; Text</div></pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 

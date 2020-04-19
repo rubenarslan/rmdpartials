@@ -13,8 +13,8 @@ knitr::kable(coef(regression))
 Values vs. fitted values.
 
 ```{r}
-enlarge_plot(plot(regression$model[,1], fitted(regression)),
-             large_plot = plot(regression$model[,1], fitted(regression)))
+pars <- par(ask = FALSE)
+plot(regression$model[,1], fitted(regression))
 ```
 
 <details>
@@ -23,6 +23,7 @@ enlarge_plot(plot(regression$model[,1], fitted(regression)),
 
 ```{r}
 plot(regression, ask = FALSE)
+par(pars)
 ```
 
 </details>

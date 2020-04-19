@@ -9,11 +9,14 @@ knit_child_debug(...)
 \arguments{
 \item{...}{passed to \code{\link[=partial]{partial()}}}
 }
+\value{
+Returns markdown/HTML text with class "knit_asis"
+}
 \description{
 Get some debugging information on various potential problems when making partials
 }
 \examples{
-\dontrun{
+if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
 knit_child_debug()
 }
 }
