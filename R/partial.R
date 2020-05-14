@@ -267,11 +267,16 @@ needs_preview <- function() {
   # via a chunk option
   child <- knitr::opts_knit$get("child")
 
+
+  # for checks, we don't want to clutter the build dir and it's running
+  # examples that users will run as interactive
+  checking <- Sys.getenv("checkArgs") != ""
+
   # so we build our own
   ## if there is a viewer available, we are probably in RStudio and not knitting
   interactive <- is_interactive()
 
-  (!child && interactive)
+  (!child && (checking || interactive))
 }
 
 

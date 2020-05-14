@@ -39,6 +39,7 @@ Returns markdown/HTML text with class "knit_asis"
 Generate a small plot that will be enlarged in a modal when clicked
 }
 \examples{
+\dontrun{
 if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
 # will generate figures in a temporary directory
 if (requireNamespace("ggplot2")) {
@@ -49,6 +50,7 @@ large_plot = dist + ggplot2::theme_classic(base_size = 18))
 graphics::hist(stats::rbeta(200, 3, 4))
 dist <- grDevices::recordPlot()
 enlarge_plot(dist)
+}
 }
 }
 }

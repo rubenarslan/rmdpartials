@@ -1,4 +1,7 @@
 ## Resubmission
+* I added dontrun to two examples that make figures again. In interactive use, files are only generated in temporary directories, but I have been unable to figure out how to detect that the documentation is being checked (non-interactive, but also shouldn't make files). This is difficult here, because I cannot switch to a temporary directory, if the functions are run as child documents in a knit document.
+
+## Last resubmission
 * I added \value documentation for all functions.
 * I added an example for `as.partial`
 * The initial submission already called `on.exit` after any change to options or WD, now I always call `on.exit` immediately before changing something, as recommended. 
@@ -11,7 +14,6 @@
   that all function calls unload cleanly (i.e., reset all options and working directory to their previous state, don't
   leave behind files in the working directory). I hope it's okay with CRAN with this additional explanation. Should
   there be a way to avoid setting the options and working directories as I do, I'd be glad to learn, but I found none.
-* The dontrun sections were replaced by checking for pkgdown (which cannot render the output well)s. I tried to use the simplest possible examples now. Also, there are tests for the aspects of functions that are excluded via dontrun.
 
 ## Old submission notes
 * First release
