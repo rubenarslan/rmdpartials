@@ -87,22 +87,14 @@ partial <- function(input = NULL, ...,
   on.exit(options(knitr.duplicate.label = dupes), add = TRUE)
   options(knitr.duplicate.label = 'allow')
 
+  # prepare options
   knit_options <- list()
-
-  if (!is.null(input) && use_strings) {
-    if (!isAbsolutePath(input) &&
-        !is.null(knitr::opts_knit$get("rmdpartials_original_wd"))) {
-      input <- file.path(knitr::opts_knit$get("rmdpartials_original_wd"), input)
-    }
-    text <- paste0(readLines(input), collapse = "\n")
-    input <- NULL
-  }
-
   if (is.null(options)) {
     options <- list()
   }
   stopifnot(is.list(options))
 
+  # prepare chunk prefixes
   if (is.null(name)) {
     if(arguments_given) {
       name <- substr(digest::digest(envir), 1, 10)
@@ -111,7 +103,6 @@ partial <- function(input = NULL, ...,
     }
   }
   safe_name <- safe_name(name)
-
   if (is.null(options$fig.path)) {
     options$fig.path <- paste0(
       knitr::opts_chunk$get("fig.path"), safe_name, "_")
@@ -121,6 +112,21 @@ partial <- function(input = NULL, ...,
       knitr::opts_chunk$get("cache.path"), safe_name, "_")
   }
 
+
+  # save the original working directory for relative paths, in case we use tmp
+  if (!is.null(input) && use_strings) {
+    if (!isAbsolutePath(input) &&
+        !is.null(knitr::opts_knit$get("rmdpartials_original_wd"))) {
+      input <- file.path(knitr::opts_knit$get("rmdpartials_original_wd"), input)
+    }
+    text <- paste0(readLines(input), collapse = "\n")
+    input <- NULL
+  }
+
+
+  # decide whether to render as
+  # a) child (in working directory, with knitr)
+  # b) preview (in tmp directory, with rmarkdown)
   if (!render_preview) {
     knit_options$child <- TRUE
     if (is.null(knitr::opts_knit$get("output.dir"))) {
@@ -182,11 +188,13 @@ partial <- function(input = NULL, ...,
 
   knit_meta <- list()
   if (!render_preview) {
+    # a) render with knitr as child document
     knit_meta$output.dir <- knit_options$output.dir
     res <- knitr::knit(input = input, output = NULL, text = text,
                        quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
                        envir = envir, encoding = encode)
   } else {
+    # b) render with rmarkdown as preview
     text <- paste0("---
 pagetitle: Partial preview
 ---
