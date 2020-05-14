@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -156,23 +156,34 @@ Close
 <a href="#debug" class="anchor"></a>Debug</h2>
 <p>Learn about environments in partials.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/knit_child_debug.html">knit_child_debug</a></span>()</pre></body></html></div>
-<pre><code>## Warning in readLines(input): incomplete final line found on '/private/var/
-## folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T/Rtmp9er7z0/temp_libpatha85866ae4d30/
-## rmdpartials/_debug.Rmd'</code></pre>
 <details><p><summary>Debug</summary></p>
 <p>Working directory</p>
 <pre><code>## [1] "/Users/rubenarslan/research/rmdpartials/vignettes"</code></pre>
+<p>needs_preview()</p>
+<pre><code>## [1] FALSE</code></pre>
+<p>is_interactive()</p>
+<pre><code>## [1] FALSE</code></pre>
 <p>Knitr Output.dir</p>
 <pre><code>## [1] "/Users/rubenarslan/research/rmdpartials/vignettes"</code></pre>
 <p>Child mode</p>
 <pre><code>## [1] TRUE</code></pre>
 <p>Viewer null</p>
 <pre><code>## [1] TRUE</code></pre>
-<p>in temp dir</p>
+<p>In tmp dir</p>
+<pre><code>## [1] FALSE</code></pre>
+<p>knitr.in.progress</p>
+<pre><code>## [1] TRUE</code></pre>
+<p>rstudio.notebook.executing</p>
+<pre><code>## NULL</code></pre>
+<p>TESTTHAT_interactive</p>
+<pre><code>## [1] ""</code></pre>
+<p>TESTTHAT</p>
+<pre><code>## [1] ""</code></pre>
+<p>interactive</p>
 <pre><code>## [1] FALSE</code></pre>
 <p>objects in this environment</p>
-<pre><code>## character(0)</code></pre>
-<details><p><summary>opts_knit</summary></p>
+<pre><code>## [1] "is_interactive" "needs_preview"</code></pre>
+<details><p><summary>knitr::opts_knit</summary></p>
 <pre><code>## $progress
 ## [1] FALSE
 ## 
@@ -197,7 +208,7 @@ Close
 ## $upload.fun
 ## function (x) 
 ## x
-## &lt;bytecode: 0x7f8b834f0ed8&gt;
+## &lt;bytecode: 0x7fa6b99043c0&gt;
 ## &lt;environment: namespace:base&gt;
 ## 
 ## $global.device
@@ -261,7 +272,7 @@ Close
 ##  [6] "--toc-depth"                                                                       
 ##  [7] "2"                                                                                 
 ##  [8] "--template"                                                                        
-##  [9] "/var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//RtmpOHmtuF/fileabbe66228d20.html"
+##  [9] "/var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//RtmpEjSZ58/filec8437bea02a9.html"
 ## [10] "--highlight-style"                                                                 
 ## [11] "pygments"                                                                          
 ## 
@@ -279,7 +290,7 @@ Close
 ## 
 ## $rmarkdown.runtime
 ## [1] "static"</code></pre>
-</details><details><p><summary>opts_chunk</summary></p>
+</details><details><p><summary>knitr::opts_chunk</summary></p>
 <pre><code>## $eval
 ## [1] TRUE
 ## 
@@ -441,23 +452,22 @@ Close
 </details><details><p><summary>Sys.getenv()</summary></p>
 <pre><code>## __CF_USER_TEXT_ENCODING
 ##                         0x1F7:0x0:0x2
-## __KMP_REGISTERED_LIB_41632
-##                         0x1041fb8e8-cafec7ce-libomp.dylib
-## __KMP_REGISTERED_LIB_43096
-##                         0x10ca848e8-cafe1ab1-libomp.dylib
-## __KMP_REGISTERED_LIB_43966
-##                         0x10a0568e8-cafee9b3-libomp.dylib
-## __KMP_REGISTERED_LIB_43992
-##                         0x1041c58e8-cafefd5d-libomp.dylib
+## __KMP_REGISTERED_LIB_49923
+##                         0x105218c20-cafeb0bd-libomp.dylib
+## __KMP_REGISTERED_LIB_51267
+##                         0x1080b1c20-cafe76d6-libomp.dylib
+## __KMP_REGISTERED_LIB_51305
+##                         0x103be6c20-cafebc2c-libomp.dylib
 ## _R_CHECK_LENGTH_1_LOGIC2_
 ##                         TRUE
 ## Apple_PubSub_Socket_Render
-##                         /private/tmp/com.apple.launchd.xNvXLRg8st/Render
+##                         /private/tmp/com.apple.launchd.7LbHLOUe9h/Render
 ## BIBINPUTS               ::/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex
 ## BSTINPUTS               :/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/bibtex/bst
 ## CLICOLOR_FORCE          1
+## COMMAND_MODE            unix2003
 ## CYGWIN                  nodosfilewarning
-## DISPLAY                 /private/tmp/com.apple.launchd.PnIouNsQmo/org.macosforge.xquartz:0
+## DISPLAY                 /private/tmp/com.apple.launchd.0IUzPaJFtq/org.macosforge.xquartz:0
 ## DYLD_FALLBACK_LIBRARY_PATH
 ##                         /Library/Frameworks/R.framework/Resources/lib:/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/server
 ## EDITOR                  vi
@@ -472,9 +482,9 @@ Close
 ## MPLENGINE               tkAgg
 ## PAGER                   /usr/bin/less
 ## PATH                    /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/TeX/texbin:/usr/local/MacGPG2/bin:/opt/puppetlabs/bin:/usr/local/munki:/opt/X11/bin:/usr/local/git/bin
-## PROCESSX_PS4VFAQRK015_1587314111
+## PROCESSX_PSO3Z0JU42DS_1589468176
 ##                         YES
-## PROCESSX_PSRZ7A374PHG_1587314102
+## PROCESSX_PSWL4DIEEXOM_1589468185
 ##                         YES
 ## PWD                     /Users/rubenarslan/research/rmdpartials
 ## R_ARCH                  
@@ -485,13 +495,7 @@ Close
 ## R_HOME                  /Library/Frameworks/R.framework/Resources
 ## R_INCLUDE_DIR           /Library/Frameworks/R.framework/Resources/include
 ## R_LIBS_SITE             
-## R_LIBS_USER             ~/Library/R/3.5/library
-## R_PACKRAT_DEFAULT_LIBPATHS
-##                         /Library/Frameworks/R.framework/Versions/3.5/Resources/library
-## R_PACKRAT_SITE_LIBRARY
-##                         
-## R_PACKRAT_SYSTEM_LIBRARY
-##                         /Library/Frameworks/R.framework/Resources/library
+## R_LIBS_USER             ~/Library/R/3.6/library
 ## R_PAPERSIZE             a4
 ## R_PAPERSIZE_USER        a4
 ## R_PDFVIEWER             false
@@ -499,35 +503,39 @@ Close
 ## R_PRINTCMD              lpr
 ## R_QPDF                  /Library/Frameworks/R.framework/Resources/bin/qpdf
 ## R_RD4PDF                times,inconsolata,hyper
-## R_SESSION_TMPDIR        /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//RtmpyQLFwF
+## R_SESSION_TMPDIR        /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T//RtmpEy3E3q
 ## R_SHARE_DIR             /Library/Frameworks/R.framework/Resources/share
-## R_SYSTEM_ABI            osx,gcc,gxx,gfortran,?
+## R_STRIP_SHARED_LIB      strip -x
+## R_STRIP_STATIC_LIB      strip -S
+## R_SYSTEM_ABI            osx,gcc,gxx,gfortran,gfortran
 ## R_TESTS                 
 ## R_TEXI2DVICMD           /usr/local/bin/texi2dvi
 ## R_UNZIPCMD              /usr/bin/unzip
 ## R_ZIPCMD                /usr/bin/zip
 ## RMARKDOWN_MATHJAX_PATH
 ##                         /Applications/RStudio.app/Contents/Resources/resources/mathjax-26
-## RS_PPM_FD_READ          4
-## RS_PPM_FD_WRITE         30
+## RS_PPM_FD_READ          83
+## RS_PPM_FD_WRITE         84
 ## RS_RPOSTBACK_PATH       /Applications/RStudio.app/Contents/MacOS/rpostback
-## RS_SHARED_SECRET        159612311118228919001342455198
+## RS_SHARED_SECRET        4867539891109081700178075940
 ## RSTUDIO                 1
 ## RSTUDIO_CONSOLE_COLOR   256
-## RSTUDIO_CONSOLE_WIDTH   142
+## RSTUDIO_CONSOLE_WIDTH   122
 ## RSTUDIO_PANDOC          /Applications/RStudio.app/Contents/MacOS/pandoc
-## RSTUDIO_SESSION_PORT    13971
+## RSTUDIO_SESSION_PORT    22726
 ## RSTUDIO_USER_IDENTITY   rubenarslan
 ## RSTUDIO_WINUTILS        bin/winutils
+## SECURITYSESSIONID       186a8
 ## SED                     /usr/bin/sed
 ## SHELL                   /bin/bash
 ## SHLVL                   0
 ## SSH_ASKPASS             rpostback-askpass
-## SSH_AUTH_SOCK           /private/tmp/com.apple.launchd.waieW1S4mW/Listeners
+## SSH_AUTH_SOCK           /private/tmp/com.apple.launchd.kKbAnFdQKs/Listeners
 ## TAR                     /usr/bin/tar
 ## TERM                    xterm-256color
 ## TEXINPUTS               :/Users/rubenarslan/research/rmdpartials/vignettes:/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex
 ## TMPDIR                  /var/folders/tr/lgwjmdgd72bckr1hj5gd_7640000gq/T/
+## TWITTER_PAT             /Users/rubenarslan/.rtweet_token3.rds
 ## USER                    rubenarslan
 ## XPC_FLAGS               0x0
 ## XPC_SERVICE_NAME        0</code></pre>
@@ -543,20 +551,6 @@ Close
 ## 
 ## $browserNLdisabled
 ## [1] FALSE
-## 
-## $callr.condition_handler_cli_message
-## function (msg) 
-## {
-##     custom_handler &lt;- getOption("cli.default_handler")
-##     if (is.function(custom_handler)) {
-##         custom_handler(msg)
-##     }
-##     else {
-##         cli_server_default(msg)
-##     }
-## }
-## &lt;bytecode: 0x7f8b8567dfd8&gt;
-## &lt;environment: namespace:cli&gt;
 ## 
 ## $CBoundsCheck
 ## [1] FALSE
@@ -588,7 +582,7 @@ Close
 ## {
 ##     grDevices::pdf(NULL, width, height, ...)
 ## }
-## &lt;bytecode: 0x7f8b82f53208&gt;
+## &lt;bytecode: 0x7fa6bbb56a30&gt;
 ## &lt;environment: namespace:knitr&gt;
 ## 
 ## $device.ask.default
@@ -622,24 +616,6 @@ Close
 ## $expressions
 ## [1] 5000
 ## 
-## $fansi.css
-## [1] "PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};"
-## 
-## $fansi.ctrl
-## [1] "all"
-## 
-## $fansi.tab.stops
-## [1] 8
-## 
-## $fansi.tabs.as.spaces
-## [1] FALSE
-## 
-## $fansi.term.cap
-## [1] "bright" "256"   
-## 
-## $fansi.warn
-## [1] TRUE
-## 
 ## $help.search.types
 ## [1] "vignette" "demo"     "help"    
 ## 
@@ -647,13 +623,19 @@ Close
 ## [1] FALSE
 ## 
 ## $HTTPUserAgent
-## [1] "R (3.5.3 x86_64-apple-darwin15.6.0 x86_64 darwin15.6.0)"
+## [1] "R (3.6.3 x86_64-apple-darwin15.6.0 x86_64 darwin15.6.0)"
 ## 
 ## $install.packages.compile.from.source
 ## [1] "interactive"
 ## 
 ## $internet.info
 ## [1] 2
+## 
+## $keep.parse.data
+## [1] TRUE
+## 
+## $keep.parse.data.pkgs
+## [1] FALSE
 ## 
 ## $keep.source
 ## [1] FALSE
@@ -751,6 +733,14 @@ Close
 ## 
 ## $str$vec.len
 ## [1] 4
+## 
+## $str$drop.deparse.attr
+## [1] TRUE
+## 
+## $str$formatNum
+## function (x, ...) 
+## format(x, trim = TRUE, drop0trailing = TRUE, ...)
+## &lt;environment: 0x7fa6ba8ce548&gt;
 ## 
 ## 
 ## $str.dendrogram.last
