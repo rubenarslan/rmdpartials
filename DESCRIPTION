@@ -8,7 +8,7 @@ Description:
 		using a combination of figures, tables, text, and HTML widgets. 
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
 		output formats than HTML.
-Version: 0.5.1
+Version: 0.5.3
 Authors@R: c(
   person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre")),
   person("Gjalt-Jorn", "Peters", email = "gjalt-jorn@userfriendlyscience.com",

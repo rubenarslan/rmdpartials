@@ -23,3 +23,4 @@ revdep
 renv
 ^renv$
 ^renv\.lock$
+figure

@@ -7,6 +7,16 @@ Working directory
 getwd()
 ```
 
+needs_preview()
+```{r}
+needs_preview
+```
+
+is_interactive()
+```{r}
+is_interactive
+```
+
 Knitr Output.dir
 ```{r}
 knitr::opts_knit$get("output.dir")
@@ -17,16 +27,40 @@ Child mode
 knitr::opts_knit$get("child")
 ```
 
-
 Viewer null
 ```{r}
 is.null(getOption("viewer"))
 ```
 
-in temp dir
+In tmp dir
 ```{r}
 !is.null(knitr::opts_knit$get("output.dir")) &&
   !identical(knitr::opts_knit$get("output.dir"), getwd())
+```
+
+knitr.in.progress
+```{r}
+getOption("knitr.in.progress")
+```
+
+rstudio.notebook.executing
+```{r}
+getOption("rstudio.notebook.executing")
+```
+
+TESTTHAT_interactive
+```{r}
+Sys.getenv("TESTTHAT_interactive")
+```
+
+TESTTHAT
+```{r}
+Sys.getenv("TESTTHAT")
+```
+
+interactive
+```{r}
+interactive()
 ```
 
 objects in this environment
@@ -36,7 +70,7 @@ ls()
 
 <details>
 
-<summary>opts_knit</summary>
+<summary>knitr::opts_knit</summary>
 ```{r}
 print(knitr::opts_knit$get())
 ```
@@ -45,7 +79,7 @@ print(knitr::opts_knit$get())
 
 <details>
 
-<summary>opts_chunk</summary>
+<summary>knitr::opts_chunk</summary>
 ```{r}
 print(knitr::opts_chunk$get())
 ```
@@ -71,3 +105,4 @@ print(options())
 </details>
 
 </details>
+
