@@ -16,7 +16,7 @@
 #' @examples
 #' \dontrun{
 #' if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
-#' # will generate figures in a temporary directory
+#' # will generate files in a temporary directory
 #' if (requireNamespace("ggplot2")) {
 #' dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))
 #' enlarge_plot(dist,

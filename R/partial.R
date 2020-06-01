@@ -35,12 +35,12 @@
 #' # super simple partial example
 #' partial(text = "Test")
 #'
-#' \dontrun{
 #' # an example of a wrapper function that calls partial with an argument
 #' # ensures distinct paths for cache and figures, so that these calls can be looped in parallel
-#' regression_summary <- function(regression) {
-#'    partial("_regression_summary.Rmd")
-#' }
+#' regression_diagnostics <- function(regression, ...) {
+#'    partial(system.file("_regression_diagnostics.Rmd",
+#'            package = "rmdpartials", mustWork = TRUE),
+#'            regression = regression, ...)
 #' }
 partial <- function(input = NULL, ...,
                     text = NULL, output = NULL,

@@ -1,5 +1,6 @@
 ## Resubmission
-* I added dontrun to two examples that make figures again. In interactive use, files are only generated in temporary directories, but I have been unable to figure out how to detect that the documentation is being checked (non-interactive, but also shouldn't make files). This is difficult here, because I cannot switch to a temporary directory, if the functions are run as child documents in a knit document.
+* I kept dontrun for two examples that make figures again (donttest, as was recommended, won't do). In interactive use, files are only generated in temporary directories, but I have been unable to figure out how to detect that the documentation is being checked (non-interactive, but also shouldn't make files in working directory). This is difficult here, because I cannot switch to a temporary directory, if the functions are run as child documents in a knit document, so I need to detect the context.
+* I made sure that all examples are runnable. I also removed dontrun from the example illustrating how to use partial in a function and fixed the file path.
 
 ## Last resubmission
 * I added \value documentation for all functions.

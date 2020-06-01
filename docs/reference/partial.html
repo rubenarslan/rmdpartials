@@ -79,7 +79,7 @@ the package takes care of some troubles behind the scenes that you might find yo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rmdpartials</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
       </span>
     </div>
 
@@ -222,12 +222,12 @@ However, you may also want to use knit children to respect conventional scoping 
     <pre class="examples"><div class='input'><span class='co'># super simple partial example</span>
 <span class='fu'>partial</span>(<span class='kw'>text</span> <span class='kw'>=</span> <span class='st'>"Test"</span>)</div><div class='output co'>#&gt; <span class='message'>No viewer found, probably documenting or testing</span></div><div class='output co'>#&gt; 
 #&gt; Test</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># an example of a wrapper function that calls partial with an argument</span>
 <span class='co'># ensures distinct paths for cache and figures, so that these calls can be looped in parallel</span>
-<span class='no'>regression_summary</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>regression</span>) {
-   <span class='fu'>partial</span>(<span class='st'>"_regression_summary.Rmd"</span>)
-}
+<span class='no'>regression_diagnostics</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>regression</span>, <span class='no'>...</span>) {
+   <span class='fu'>partial</span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"_regression_diagnostics.Rmd"</span>,
+           <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"rmdpartials"</span>, <span class='kw'>mustWork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+           <span class='kw'>regression</span> <span class='kw'>=</span> <span class='no'>regression</span>, <span class='no'>...</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
