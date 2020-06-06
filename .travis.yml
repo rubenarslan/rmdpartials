@@ -16,17 +16,14 @@ matrix:
 
       r_binary_packages:
         - knitr
-        - htmltools
         - rlang
         - testthat
-        - roxygen2
         - rmarkdown
-        - pkgdown
         - covr
-        - spelling
         - dplyr
         - DT
         - ggplot2
+        - pkgdown
 
 after_success:
   - Rscript -e 'library(covr); codecov()'

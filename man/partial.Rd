@@ -13,6 +13,7 @@ partial(
   options = NULL,
   envir = parent.frame(),
   name = NULL,
+  cacheable = NA,
   show_code = FALSE,
   use_strings = TRUE,
   render_preview = needs_preview(),
@@ -35,6 +36,8 @@ partial(
 \item{envir}{passed to \code{\link[knitr:knit_child]{knitr::knit_child()}}}
 
 \item{name}{a name to use for cacheing and figure paths. Randomly generated if left unspecified.}
+
+\item{cacheable}{whether the results of this partial can be cached in knitr}
 
 \item{show_code}{whether to print the R code for the partial or just the results (sets the chunk option echo = FALSE while the chunk is being rendered)}
 

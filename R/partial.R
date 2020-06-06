@@ -23,6 +23,7 @@
 #' @param options defaults to NULL.
 #' @param envir passed to [knitr::knit_child()]
 #' @param name a name to use for cacheing and figure paths. Randomly generated if left unspecified.
+#' @param cacheable whether the results of this partial can be cached in knitr
 #' @param show_code whether to print the R code for the partial or just the results (sets the chunk option echo = FALSE while the chunk is being rendered)
 #' @param use_strings whether to read in the child file as a character string (solves working directory problems but harder to debug)
 #' @param render_preview true if interactive mode is auto-detected, false when actually knitting the partial as a child
@@ -46,6 +47,7 @@ partial <- function(input = NULL, ...,
                     text = NULL, output = NULL,
                     quiet = TRUE, options = NULL,
                     envir = parent.frame(), name = NULL,
+                    cacheable = NA,
                     show_code = FALSE,
                     use_strings = TRUE,
                     render_preview = needs_preview(),
@@ -241,7 +243,7 @@ pagetitle: Partial preview
 
 
   knitr::asis_output(paste(c("", res), collapse = "\n"),
-                            meta = knit_meta)
+                            meta = knit_meta, cacheable = cacheable)
 }
 
 is_interactive <- function()
