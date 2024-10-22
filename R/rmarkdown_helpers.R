@@ -46,7 +46,6 @@ pagetitle: Partial preview
     }
 
   } else {
-    message("No viewer found, probably documenting or testing")
     cat(x)
   }
   invisible(x)
