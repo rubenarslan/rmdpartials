@@ -27,7 +27,7 @@ library(rmdpartials)
 library(ggplot2)
 x <- rnorm(100)
 y <- x + rnorm(100) + 0.5 * x^2
-curve <- qplot(x, y)
+curve <- ggplot(mapping = aes(x, y)) + geom_point()
 enlarge_plot(curve, large_plot = curve + theme_classic(base_size = 20), plot_name = "myplot")
 ```
 

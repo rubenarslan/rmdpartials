@@ -18,7 +18,8 @@
 #' if(!requireNamespace("pkgdown", quietly = TRUE) || !pkgdown::in_pkgdown()) {
 #' # will generate files in a temporary directory
 #' if (requireNamespace("ggplot2")) {
-#' dist <- ggplot2::qplot(stats::rbeta(200, 3, 4))
+#' dist <- ggplot2::ggplot(mtcars, ggplot2::aes(mpg, hp)) +
+#'          ggplot2::geom_point()
 #' enlarge_plot(dist,
 #' large_plot = dist + ggplot2::theme_classic(base_size = 18))
 #' } else {
