@@ -70,8 +70,7 @@ plot(1:100)
   # if making a partial from top level, switch to a new temp
   expect_error(expect_equal(output.dir, test_dir))
 
-  files <- c("index_files", "index.html", "index.knit.md", "index.Rmd",
-             "index.utf8.md")
+  files <- c("index_files", "index.html", "index.knit.md", "index.Rmd")
   expect_setequal("oneplot.Rmd", list.files(test_dir))
   expect_setequal(files, list.files(output.dir))
   expect_setequal(1, length(list.files(
