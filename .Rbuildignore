@@ -24,3 +24,5 @@ renv
 ^renv$
 ^renv\.lock$
 figure
+^pkgdown$
+^\.github$
