@@ -7,7 +7,8 @@ Description:
 		You may want to use this package, if you want to flexibly summarise objects 
 		using a combination of figures, tables, text, and HTML widgets. 
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
-		output formats than HTML.
+		output formats than HTML. Currently does not play well with rmarkdown notebooks,
+		not tested with Quarto.
 Version: 0.6.2
 Authors@R: c(
   person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre")),
