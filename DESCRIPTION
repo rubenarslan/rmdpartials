@@ -35,7 +35,8 @@ Suggests:
     dplyr,
     DT,
     ggplot2,
-    pkgdown
+    pkgdown,
+    spelling
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE) 
