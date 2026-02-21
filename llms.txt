@@ -1,0 +1,134 @@
+# rmdpartials
+
+[![Travis-CI Build
+Status](https://app.travis-ci.com/rubenarslan/rmdpartials.svg?branch=master)](https://app.travis-ci.com/rubenarslan/rmdpartials)
+[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rubenarslan/rmdpartials)
+
+*Simplify using rmarkdown partials to document objects in R*
+
+## Description
+
+Ever want to make a standardized way to report a summary of something
+like a regression, but did not want to limit yourself to one unformatted
+block of text, one table, or one figure?
+
+Rmarkdown partials allow you to define standardised knitr code chunks
+that become part of your rmarkdown report. They can then be turned into
+HTML, PDFs, or Word files. You could, for example, create an rmarkdown
+partial to summarise regression models in a flexible way.
+
+You can also define your partials as methods of `knit_print`, so that a
+rich rmarkdown partial is made by default.
+
+## Documentation
+
+Confer the help or: <https://rubenarslan.github.io/rmdpartials/>. See
+the
+[vignette](https://rubenarslan.github.io/rmdpartials/articles/rmdpartials.html)
+for a quick example of an HTML document generated with `rmdpartials`.
+
+## Install
+
+To get the latest development version:
+
+``` r
+install.packages("remotes")
+remotes::install_github("rubenarslan/rmdpartials")
+```
+
+## Define a partial
+
+Define a function like this:
+
+``` r
+my_summary <- function(object) {
+  rmdpartials::partial("_my_summary.Rmd")
+}
+```
+
+And create a file called `_my_summary.Rmd` with contents like this:
+
+```` R
+## My special summary
+
+```{r}
+summary(object)
+```
+
+## My special plot
+```{r}
+plot(object)
+```
+````
+
+## Usage
+
+To use the partial in an rmarkdown report
+
+```` R
+```{r}
+m1 <- lm(y ~ x, data = data)
+my_summary(m1)
+```
+````
+
+### Usage as a knit_print method
+
+To make your partial the default printing option for objects of a
+certain class when they are echoed in a knitr document, give it the name
+of a knit_print method.
+
+``` r
+knit_print.lm <- function(object) {
+  rmdpartials::partial("_my_summary.Rmd")
+}
+```
+
+Now, all you need to is let the lm object be echoed.
+
+```` R
+```{r}
+m1 <- lm(y ~ x, data = data)
+m1
+```
+````
+
+You can also preview what the result from the partial would look like by
+calling it in an interactive session.
+
+## [Code of conduct for contributing](https://rubenarslan.github.io/rmdpartials/CONDUCT.html)
+
+# Package index
+
+## All functions
+
+- [`as.partial()`](https://rubenarslan.github.io/rmdpartials/reference/as.partial.md)
+  : Convert text or file to a partial
+
+- [`enlarge_plot()`](https://rubenarslan.github.io/rmdpartials/reference/enlarge_plot.md)
+  : Generate a small plot that will be enlarged in a modal when clicked
+
+- [`knit_child_debug()`](https://rubenarslan.github.io/rmdpartials/reference/knit_child_debug.md)
+  : Get some debugging information on various potential problems when
+  making partials
+
+- [`partial()`](https://rubenarslan.github.io/rmdpartials/reference/partial.md)
+  : Knit a child document and output as is (render markup)
+
+- [`paste.knit_asis()`](https://rubenarslan.github.io/rmdpartials/reference/paste.knit_asis.md)
+  : Paste and output as is (render markup)
+
+- [`print(`*`<knit_asis>`*`)`](https://rubenarslan.github.io/rmdpartials/reference/print.knit_asis.md)
+  :
+
+  Print `knit_asis` as rendered HTML in the viewer
+
+- [`regression_diagnostics()`](https://rubenarslan.github.io/rmdpartials/reference/regression_diagnostics.md)
+  : Show the estimated coefficients in a regression and diagnostics
+
+# Articles
+
+### All vignettes
+
+- [Rmarkdown partial
+  example](https://rubenarslan.github.io/rmdpartials/articles/rmdpartials.md):
