@@ -3,4 +3,11 @@
 .RData
 .Ruserdata
 ^figure$
-docs
+*.Rcheck/
+*.tar.gz
+tests/figure/
+tests/index.html
+tests/index.md
+tests/index_files/
+tests/rmdpartials_caching.Rmd
+tests/rmdpartials_notebook.Rmd
