@@ -9,7 +9,7 @@ Description:
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
 		output formats than HTML. Currently does not play well with rmarkdown notebooks,
 		not tested with Quarto.
-Version: 0.6.2
+Version: 0.6.3
 Authors@R: c(
   person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre")),
   person("Gjalt-Jorn", "Peters", email = "gjalt-jorn@userfriendlyscience.com",
@@ -37,7 +37,6 @@ Suggests:
     ggplot2,
     pkgdown
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE) 
 VignetteBuilder: knitr

@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 ```
 
 # rmdpartials
-[![Travis-CI Build Status](https://travis-ci.org/rubenarslan/rmdpartials.svg?branch=master)](https://travis-ci.org/rubenarslan/rmdpartials) 
-[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://codecov.io/gh/rubenarslan/rmdpartials)
+[![Travis-CI Build Status](https://app.travis-ci.com/rubenarslan/rmdpartials.svg?branch=master)](https://app.travis-ci.com/rubenarslan/rmdpartials) 
+[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rubenarslan/rmdpartials)
 
 _Simplify using rmarkdown partials to document objects in R_
 
@@ -28,7 +28,7 @@ PDFs, or Word files. You could, for example, create an rmarkdown partial to summ
 You can also define your partials as methods of `knit_print`, so that a rich rmarkdown partial is made by default.
 
 ## Documentation
-Confer the help or: https://rubenarslan.github.io/rmdpartials.
+Confer the help or: https://rubenarslan.github.io/rmdpartials/.
 See the [vignette](https://rubenarslan.github.io/rmdpartials/articles/rmdpartials.html) for a quick example of an HTML document generated with `rmdpartials`.
 
 ## Install

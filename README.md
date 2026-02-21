@@ -4,8 +4,8 @@
 # rmdpartials
 
 [![Travis-CI Build
-Status](https://travis-ci.org/rubenarslan/rmdpartials.svg?branch=master)](https://travis-ci.org/rubenarslan/rmdpartials)
-[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://codecov.io/gh/rubenarslan/rmdpartials)
+Status](https://app.travis-ci.com/rubenarslan/rmdpartials.svg?branch=master)](https://app.travis-ci.com/rubenarslan/rmdpartials)
+[![codecov](https://codecov.io/gh/rubenarslan/rmdpartials/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rubenarslan/rmdpartials)
 
 *Simplify using rmarkdown partials to document objects in R*
 
@@ -25,7 +25,7 @@ rich rmarkdown partial is made by default.
 
 ## Documentation
 
-Confer the help or: <https://rubenarslan.github.io/rmdpartials>. See the
+Confer the help or: <https://rubenarslan.github.io/rmdpartials/>. See the
 [vignette](https://rubenarslan.github.io/rmdpartials/articles/rmdpartials.html)
 for a quick example of an HTML document generated with `rmdpartials`.
 
