@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   rmdpartials: rmdpartials.html
-last_built: 2026-02-21T11:50Z
+last_built: 2026-02-21T12:04Z
 urls:
   reference: https://rubenarslan.github.io/rmdpartials/reference
   article: https://rubenarslan.github.io/rmdpartials/articles

@@ -35,11 +35,11 @@ regression_diagnostics(reg)
 
 Values vs. fitted values.
 
-![](rmdpartials_files/figure-html/e6ae2d2f02_rmdpartial-16-1.png)
+![](rmdpartials_files/figure-html/56b41859bf_rmdpartial-16-1.png)
 
 Diagnostics (click to show)
 
-![](rmdpartials_files/figure-html/e6ae2d2f02_rmdpartial-17-1.png)![](rmdpartials_files/figure-html/e6ae2d2f02_rmdpartial-17-2.png)![](rmdpartials_files/figure-html/e6ae2d2f02_rmdpartial-17-3.png)![](rmdpartials_files/figure-html/e6ae2d2f02_rmdpartial-17-4.png)
+![](rmdpartials_files/figure-html/56b41859bf_rmdpartial-17-1.png)![](rmdpartials_files/figure-html/56b41859bf_rmdpartial-17-2.png)![](rmdpartials_files/figure-html/56b41859bf_rmdpartial-17-3.png)![](rmdpartials_files/figure-html/56b41859bf_rmdpartial-17-4.png)
 
 ### Write a partial on the fly
 
@@ -139,7 +139,7 @@ knitr::opts_knit
     ## $upload.fun
     ## function (x) 
     ## x
-    ## <bytecode: 0x55efbd9ef5e8>
+    ## <bytecode: 0x556ecb242e70>
     ## <environment: namespace:base>
     ## 
     ## $global.device
@@ -202,7 +202,7 @@ knitr::opts_knit
     ## [1] "--standalone"                                          
     ## [2] "--section-divs"                                        
     ## [3] "--template"                                            
-    ## [4] "/tmp/RtmpGwHqmy/pkgdown-rmd-template-1c1b590fe612.html"
+    ## [4] "/tmp/RtmpJjjnCB/pkgdown-rmd-template-1b9e1134cd65.html"
     ## [5] "--highlight-style"                                     
     ## [6] "pygments"                                              
     ## 
@@ -399,7 +399,7 @@ Sys.getenv()
     ##                         FALSE
     ## ACCEPT_EULA             Y
     ## ACTIONS_ORCHESTRATION_ID
-    ##                         ea13ed53-22e6-45d3-9be7-27448747e1b4.pkgdown.__default
+    ##                         19ff8543-df09-409f-84c4-e5bd7391e559.pkgdown.__default
     ## ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE
     ##                         /opt/actionarchivecache
     ## AGENT_TOOLSDIRECTORY    /opt/hostedtoolcache
@@ -443,15 +443,15 @@ Sys.getenv()
     ## GITHUB_ACTOR_ID         831109
     ## GITHUB_API_URL          https://api.github.com
     ## GITHUB_BASE_REF         
-    ## GITHUB_ENV              /home/runner/work/_temp/_runner_file_commands/set_env_029a144d-1567-4c19-998e-22c2063df96c
+    ## GITHUB_ENV              /home/runner/work/_temp/_runner_file_commands/set_env_829e214f-6c26-4e3d-a1fb-52d94d276197
     ## GITHUB_EVENT_NAME       push
     ## GITHUB_EVENT_PATH       /home/runner/work/_temp/_github_workflow/event.json
     ## GITHUB_GRAPHQL_URL      https://api.github.com/graphql
     ## GITHUB_HEAD_REF         
     ## GITHUB_JOB              pkgdown
-    ## GITHUB_OUTPUT           /home/runner/work/_temp/_runner_file_commands/set_output_029a144d-1567-4c19-998e-22c2063df96c
-    ## GITHUB_PAT              ghs_5UmDH1wcQK1njzR9XB06w5HRB4988l0RtWAk
-    ## GITHUB_PATH             /home/runner/work/_temp/_runner_file_commands/add_path_029a144d-1567-4c19-998e-22c2063df96c
+    ## GITHUB_OUTPUT           /home/runner/work/_temp/_runner_file_commands/set_output_829e214f-6c26-4e3d-a1fb-52d94d276197
+    ## GITHUB_PAT              ghs_G2Th8S85PdhM6ZWDYgGLnDmZyWlGe33MQ7WD
+    ## GITHUB_PATH             /home/runner/work/_temp/_runner_file_commands/add_path_829e214f-6c26-4e3d-a1fb-52d94d276197
     ## GITHUB_REF              refs/heads/master
     ## GITHUB_REF_NAME         master
     ## GITHUB_REF_PROTECTED    false
@@ -464,17 +464,17 @@ Sys.getenv()
     ##                         831109
     ## GITHUB_RETENTION_DAYS   90
     ## GITHUB_RUN_ATTEMPT      1
-    ## GITHUB_RUN_ID           22256261191
-    ## GITHUB_RUN_NUMBER       1
+    ## GITHUB_RUN_ID           22256470968
+    ## GITHUB_RUN_NUMBER       2
     ## GITHUB_SERVER_URL       https://github.com
-    ## GITHUB_SHA              a871473364b35516f1d46f5ff7127d8617ce396b
-    ## GITHUB_STATE            /home/runner/work/_temp/_runner_file_commands/save_state_029a144d-1567-4c19-998e-22c2063df96c
-    ## GITHUB_STEP_SUMMARY     /home/runner/work/_temp/_runner_file_commands/step_summary_029a144d-1567-4c19-998e-22c2063df96c
+    ## GITHUB_SHA              29598477926d047e4bea0e96daa21ca9f3a8b62c
+    ## GITHUB_STATE            /home/runner/work/_temp/_runner_file_commands/save_state_829e214f-6c26-4e3d-a1fb-52d94d276197
+    ## GITHUB_STEP_SUMMARY     /home/runner/work/_temp/_runner_file_commands/step_summary_829e214f-6c26-4e3d-a1fb-52d94d276197
     ## GITHUB_TRIGGERING_ACTOR
     ##                         rubenarslan
     ## GITHUB_WORKFLOW         pkgdown.yaml
     ## GITHUB_WORKFLOW_REF     rubenarslan/rmdpartials/.github/workflows/pkgdown.yaml@refs/heads/master
-    ## GITHUB_WORKFLOW_SHA     a871473364b35516f1d46f5ff7127d8617ce396b
+    ## GITHUB_WORKFLOW_SHA     29598477926d047e4bea0e96daa21ca9f3a8b62c
     ## GITHUB_WORKSPACE        /home/runner/work/rmdpartials/rmdpartials
     ## GOROOT_1_22_X64         /opt/hostedtoolcache/go/1.22.12/x64
     ## GOROOT_1_23_X64         /opt/hostedtoolcache/go/1.23.12/x64
@@ -489,14 +489,14 @@ Sys.getenv()
     ## ImageOS                 ubuntu24
     ## ImageVersion            20260201.15.1
     ## IN_PKGDOWN              true
-    ## INVOCATION_ID           80855b30538b42f0b6d79636b939a76a
+    ## INVOCATION_ID           93035947e3f94d81a91ab7ac0d5500d8
     ## JAVA_HOME               /usr/lib/jvm/temurin-17-jdk-amd64
     ## JAVA_HOME_11_X64        /usr/lib/jvm/temurin-11-jdk-amd64
     ## JAVA_HOME_17_X64        /usr/lib/jvm/temurin-17-jdk-amd64
     ## JAVA_HOME_21_X64        /usr/lib/jvm/temurin-21-jdk-amd64
     ## JAVA_HOME_25_X64        /usr/lib/jvm/temurin-25-jdk-amd64
     ## JAVA_HOME_8_X64         /usr/lib/jvm/temurin-8-jdk-amd64
-    ## JOURNAL_STREAM          9:12748
+    ## JOURNAL_STREAM          9:14203
     ## LANG                    C.UTF-8
     ## LANGUAGE                en-GB
     ## LD_LIBRARY_PATH         /opt/R/4.5.2/lib/R/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/lib/jvm/temurin-17-jdk-amd64/lib/server:/opt/R/4.5.2/lib/R/lib:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/usr/lib/jvm/temurin-17-jdk-amd64/lib/server
@@ -514,7 +514,7 @@ Sys.getenv()
     ## PKGCACHE_HTTP_VERSION   2
     ## POWERSHELL_DISTRIBUTION_CHANNEL
     ##                         GitHub-Actions-ubuntu24
-    ## PROCESSX_PS1c1b2743ac7a_1771674645
+    ## PROCESSX_PS1b9e53137b05_1771675487
     ##                         YES
     ## PSModulePath            /root/.local/share/powershell/Modules:/usr/local/share/powershell/Modules:/opt/microsoft/powershell/7/Modules:/usr/share/az_14.6.0
     ## PWD                     /home/runner/work/rmdpartials/rmdpartials
@@ -535,7 +535,7 @@ Sys.getenv()
     ## R_PLATFORM              x86_64-pc-linux-gnu
     ## R_PRINTCMD              /usr/bin/lpr
     ## R_RD4PDF                times,inconsolata,hyper
-    ## R_SESSION_TMPDIR        /tmp/RtmpmPiJAO
+    ## R_SESSION_TMPDIR        /tmp/Rtmp4WXKWt
     ## R_SHARE_DIR             /opt/R/4.5.2/lib/R/share
     ## R_STRIP_SHARED_LIB      strip --strip-unneeded
     ## R_STRIP_STATIC_LIB      strip --strip-debug
@@ -548,11 +548,11 @@ Sys.getenv()
     ## RSPM                    https://packagemanager.posit.co/cran/__linux__/noble/latest
     ## RUNNER_ARCH             X64
     ## RUNNER_ENVIRONMENT      github-hosted
-    ## RUNNER_NAME             GitHub Actions 1000000352
+    ## RUNNER_NAME             GitHub Actions 1000000356
     ## RUNNER_OS               Linux
     ## RUNNER_TEMP             /home/runner/work/_temp
     ## RUNNER_TOOL_CACHE       /opt/hostedtoolcache
-    ## RUNNER_TRACKING_ID      github_5afab1fd-aa7f-4e4e-972f-dcd7083ca43c
+    ## RUNNER_TRACKING_ID      github_61645330-d171-4b4d-a41c-f1aa45621899
     ## RUNNER_WORKSPACE        /home/runner/work/rmdpartials
     ## SED                     /usr/bin/sed
     ## SELENIUM_JAR_PATH       /usr/share/java/selenium-server.jar
@@ -560,7 +560,7 @@ Sys.getenv()
     ## SHELL                   /bin/bash
     ## SHLVL                   0
     ## SWIFT_PATH              /usr/share/swift/usr/bin
-    ## SYSTEMD_EXEC_PID        1962
+    ## SYSTEMD_EXEC_PID        2035
     ## TAR                     /usr/bin/tar
     ## TEXINPUTS               :/home/runner/work/rmdpartials/rmdpartials/vignettes:/opt/R/4.5.2/lib/R/share/texmf/tex/latex
     ## TZ                      UTC
@@ -597,7 +597,7 @@ options()
     ##         cli_server_default(msg)
     ##     }
     ## }
-    ## <bytecode: 0x55efbe6a8f50>
+    ## <bytecode: 0x556ecbefc810>
     ## <environment: namespace:cli>
     ## 
     ## $callr.rprofile_loaded
@@ -636,7 +636,7 @@ options()
     ## {
     ##     grDevices::pdf(NULL, width, height, ...)
     ## }
-    ## <bytecode: 0x55efbda6bbf0>
+    ## <bytecode: 0x556ecb2bf478>
     ## <environment: namespace:knitr>
     ## 
     ## $device.ask.default
@@ -767,7 +767,7 @@ options()
     ## [1] " \t\n\"\\'`><=%;,|&{()}"
     ## 
     ## $rlang_trace_top_env
-    ## <environment: 0x55efc6ea9e58>
+    ## <environment: 0x556ed46fdc60>
     ## 
     ## $scipen
     ## [1] 0
@@ -812,7 +812,7 @@ options()
     ## $str$formatNum
     ## function (x, ...) 
     ## format(x, trim = TRUE, drop0trailing = TRUE, ...)
-    ## <environment: 0x55efbbefdd98>
+    ## <environment: 0x556ec9751658>
     ## 
     ## 
     ## $str.dendrogram.last
