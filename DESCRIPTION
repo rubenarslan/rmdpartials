@@ -9,7 +9,7 @@ Description:
 		Unlike HTML widgets, the output is Markdown and can hence be turn into other
 		output formats than HTML. Currently does not play well with rmarkdown notebooks,
 		not tested with Quarto.
-Version: 0.6.3
+Version: 0.6.4
 Authors@R: c(
   person("Ruben", "Arslan", email = "ruben.arslan@gmail.com", role = c("aut", "cre")),
   person("Gjalt-Jorn", "Peters", email = "gjalt-jorn@userfriendlyscience.com",

@@ -13,6 +13,6 @@
 knit_child_debug <- function(...) {
   needs_preview <- needs_preview()
   is_interactive <- is_interactive()
-  partial(require_file("inst/_debug.Rmd"), ...)
+  partial(require_file("_debug.Rmd"), ...)
 }
 

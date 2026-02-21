@@ -182,19 +182,13 @@ partial <- function(input = NULL, ...,
   }, add = TRUE)
   knitr::opts_knit$set(knit_options)
 
-  # taken from knit_child
-  encode <- knitr::opts_knit$get("encoding")
-  if (is.null(encode)) {
-    encode <- getOption("encoding")
-  }
-
   knit_meta <- list()
   if (!render_preview) {
     # a) render with knitr as child document
     knit_meta$output.dir <- knit_options$output.dir
     res <- knitr::knit(input = input, output = NULL, text = text,
                        quiet = quiet, tangle = knitr::opts_knit$get("tangle"),
-                       envir = envir, encoding = encode)
+                       envir = envir)
   } else {
     # b) render with rmarkdown as preview
     text <- paste0("---
@@ -215,7 +209,7 @@ pagetitle: Partial preview
         rmarkdown::render(input_file_rmd,
                           output_format = preview_output_format,
                           output_file = output_file_html,
-                          envir = envir, encoding = encode,
+                          envir = envir,
                           clean = FALSE
                           )
         )
@@ -270,15 +264,9 @@ needs_preview <- function() {
   child <- knitr::opts_knit$get("child")
 
 
-  # for checks, we don't want to clutter the build dir and it's running
-  # examples that users will run as interactive
-  checking <- Sys.getenv("checkArgs") != ""
-
-  # so we build our own
-  ## if there is a viewer available, we are probably in RStudio and not knitting
   interactive <- is_interactive()
 
-  (!child && (checking || interactive))
+  (!isTRUE(child) && interactive)
 }
 
 

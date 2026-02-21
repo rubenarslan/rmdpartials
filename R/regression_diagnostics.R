@@ -17,6 +17,6 @@
 #' }
 #' }
 regression_diagnostics <- function(regression, ...) {
-  partial(require_file("inst/_regression_diagnostics.Rmd"),
+  partial(require_file("_regression_diagnostics.Rmd"),
           regression = regression, ...)
 }
