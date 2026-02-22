@@ -1,4 +1,7 @@
+RStudio
+Rmarkdown
 asis
+ci
 codecov
 ggplot
 github
@@ -7,8 +10,6 @@ knitr
 lm
 md
 rmarkdown
-Rmarkdown
 rmd
-RStudio
-rubenarslan
 sep
+travis

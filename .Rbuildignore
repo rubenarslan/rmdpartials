@@ -25,3 +25,4 @@ renv
 figure
 ^pkgdown$
 ^\.github$
+^CRAN-SUBMISSION$
